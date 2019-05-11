@@ -1,0 +1,68 @@
+[user]
+	name = Ikiru Yoshizaki
+	email = guitarrapc@users.noreply.github.com
+[core]
+	excludesfile = ~/.gitignore_global
+	attributesfile = ~/.gitattributes
+	quotepath = False
+	# windows only
+	autocrlf = true
+	symlinks = true
+	filemode = false
+[gui]
+	encoding = utf-8
+[web]
+	browser = chromium
+[commit]
+	template = .stCommitMsg
+[push]
+	default = current
+	followTags = true
+[fetch]
+	# Auto-kill defunct remote branches
+	prune = true
+[credential]
+	helper = wincred
+	# Let OS X remember our logins for us
+	# helper = osxkeychain
+[credential "https://source.developers.google.com"]
+	useHttpPath = true
+[include]
+	path = .gitconfig.local
+[help]
+	autocorrect = 1
+[color]
+	ui = auto
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[color "diff"]
+	meta = yellow bold
+	commit = green bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+	newMoved = cyan
+	oldMoved = blue
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = "red bold 52"
+	newNormal = "green bold"
+	newHighlight = "green bold 22"
+[color "branch"]
+	current = green reverse
+	local = yellow
+	remote = green
+[column]
+	ui = auto
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge --skip -- %f
+	process = git-lfs filter-process --skip
+	required = true
+[alias]
+	# hub alias
+    pr = pull-requests
+	see = browse
