@@ -43,7 +43,7 @@ function PrintResult([bool]$success, $message) {
 }
 
 function PrintError($message) {
-    Write-Host "  [✖] $message" -ForegroundColor Red
+    Write-Host "  [x] $message" -ForegroundColor Red
 }
 
 function PrintQuestion($message) {
@@ -51,7 +51,7 @@ function PrintQuestion($message) {
 }
 
 function PrintSuccess($message) {
-    Write-Host "  [✔] $message" -ForegroundColor Green
+    Write-Host "  [o] $message" -ForegroundColor Green
 }
 
 function ReadLink($path) {
