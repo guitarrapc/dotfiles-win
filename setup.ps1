@@ -58,28 +58,6 @@ function ReadLink($path) {
     return (Get-Item -LiteralPath $path).Target
 }
 
-function sudo {
-    $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-    if (!$currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        $myfunction = $MyInvocation.InvocationName
-        $cd = (Get-Location).Path
-        $commands = "Set-Location $cd; $myfunction; Pause"
-        $bytes = [System.Text.Encoding]::Unicode.GetBytes($commands)
-        $encode = [Convert]::ToBase64String($bytes)
-        $argumentList = "-NoProfile", "-ExecutionPolicy RemoteSigned", "-EncodedCommand", $encode
-
-        Write-Warning "Detected you are not runnning with Admin Priviledge."
-        $proceed = Read-Host "Required elevated priviledge to make symlink on current Windows. Do you proceed? (y/n)"
-        if ($proceed -ceq "y") {
-            $p = Start-Process -Verb RunAs powershell.exe -ArgumentList $argumentList -Wait -PassThru
-            exit $p.ExitCode
-        }
-        else {
-            Write-Host "Cancel evelated."
-            exit 1
-        }
-    }
-}
 function main() {
     $current = $(Get-Location).Path
 
@@ -158,5 +136,25 @@ if ((GetOs) -ne "windows") {
     exit 1
 }
 
-sudo
+$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+if (!$currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    $myfunction = $MyInvocation.InvocationName
+    $cd = (Get-Location).Path
+    $commands = "Set-Location $cd; $myfunction; Pause"
+    $bytes = [System.Text.Encoding]::Unicode.GetBytes($commands)
+    $encode = [Convert]::ToBase64String($bytes)
+    $argumentList = "-NoProfile", "-ExecutionPolicy RemoteSigned", "-EncodedCommand", $encode
+
+    Write-Warning "Detected you are not runnning with Admin Priviledge."
+    $proceed = Read-Host "Required elevated priviledge to make symlink on current Windows. Do you proceed? (y/n)"
+    if ($proceed -ceq "y") {
+        $p = Start-Process -Verb RunAs powershell.exe -ArgumentList $argumentList -Wait -PassThru
+        exit $p.ExitCode
+    }
+    else {
+        Write-Host "Cancel evelated."
+        exit 1
+    }
+}
+
 main
