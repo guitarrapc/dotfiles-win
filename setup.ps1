@@ -57,7 +57,7 @@ function ReadLink($path) {
 }
 function main() {
     Set-StrictMode -Version Latest
-    if (GetOs -ne "windows") {
+    if ((GetOs) -ne "windows") {
         PrintError -message "Please run on Windows."
         exit 1
     }
