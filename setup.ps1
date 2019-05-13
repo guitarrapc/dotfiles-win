@@ -62,7 +62,7 @@ function main() {
     $current = $(Get-Location).Path
 
     # dotfiles
-    Get-ChildItem -File -Filter ".*" -Force | 
+    Get-ChildItem -File -Filter ".*" -Force | Where-Object Name -notin @(".gitignore") |
     ForEach-Object {
         $sourceFile = $_.FullName
         $targetFile = "$env:UserProfile\$($_.name)"
