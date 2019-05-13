@@ -1,5 +1,7 @@
 # use mklink + Developer mode on Windows10 can avoid admin elevate issue.
 
+Set-StrictMode -Version Latest
+
 function AnswerIsYes($answer) {
     return $answer -eq "y"
 }
@@ -56,35 +58,6 @@ function ReadLink($path) {
     return (Get-Item -LiteralPath $path).Target
 }
 function main() {
-    Set-StrictMode -Version Latest
-    if ((GetOs) -ne "windows") {
-        PrintError -message "Please run on Windows."
-        exit 1
-    }
-    $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-    if (!$currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        $me = $MyInvocation.MyCommand
-        $myDefinition = (Get-Command $me).Definition
-        $myfunction = "function $me { $myDefinition }"
-
-        $cd = (Get-Location).Path
-        $commands = "Set-Location $cd; $myfunction; Write-Host 'Running $me'; $me; Pause"
-        $bytes = [System.Text.Encoding]::Unicode.GetBytes($commands)
-        $encode = [Convert]::ToBase64String($bytes)
-        $argumentList = "-NoProfile", "-EncodedCommand", $encode
-
-        Write-Warning "Detected you are not runnning with Admin Priviledge."
-        $proceed = Read-Host "Required elevated priviledge to add exlusion to Windows Defender. Do you proceed? (y/n)"
-        if ($proceed -ceq "y") {
-            $p = Start-Process -Verb RunAs powershell.exe -ArgumentList $argumentList -Wait -PassThru
-            return $p.ExitCode
-        }
-        else {
-            Write-Host "Cancel evelated."
-            return 1
-        }
-    }
-
     $current = $(Get-Location).Path
 
     # dotfiles
@@ -154,6 +127,32 @@ function main() {
                 Execute -command "cmd.exe /c mklink '$targetFile' '$sourceFile'" -message "$targetFile → $sourceFile"
             }
         }
+    }
+}
+
+if ((GetOs) -ne "windows") {
+    PrintError -message "Please run on Windows."
+    exit 1
+}
+
+$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+if (!$currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    $myfunction = $MyInvocation.InvocationName
+    $cd = (Get-Location).Path
+    $commands = "Set-Location $cd; $myfunction; Pause"
+    $bytes = [System.Text.Encoding]::Unicode.GetBytes($commands)
+    $encode = [Convert]::ToBase64String($bytes)
+    $argumentList = "-NoProfile", "-ExecutionPolicy RemoteSigned", "-EncodedCommand", $encode
+
+    Write-Warning "Detected you are not runnning with Admin Priviledge."
+    $proceed = Read-Host "Required elevated priviledge to add exlusion to Windows Defender. Do you proceed? (y/n)"
+    if ($proceed -ceq "y") {
+        $p = Start-Process -Verb RunAs powershell.exe -ArgumentList $argumentList -Wait -PassThru
+        return $p.ExitCode
+    }
+    else {
+        Write-Host "Cancel evelated."
+        return 1
     }
 }
 
