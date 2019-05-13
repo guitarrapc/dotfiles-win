@@ -1,7 +1,66 @@
 # use mklink + Developer mode on Windows10 can avoid admin elevate issue.
+
+function AnswerIsYes($answer) {
+    return $answer -eq "y"
+}
+function AskConfirmation($message) {
+    PrintQuestion -message "$message (y/n) "
+    $result = Read-Host
+    return $result
+}
+
+function Execute($command, $message) {
+    Invoke-Expression -Command "$command" > $null
+    PrintResult -success $? -message $message
+}
+
+function GetOs() {
+    $os = "windows"
+    if ($PSVersionTable.PSVersion.Major -ge 6) {
+        if ($PSVersionTable.OS -match "Darwin") {
+            $os = "osx"
+        }
+        elseif ($PSVersionTable.OS -match "Linux") {
+            $os = "linux"
+        }
+        else {
+            $os = "windows"
+        }
+    }
+    return $os
+}
+
+function PrintResult([bool]$success, $message) {
+    if ($success) {
+        PrintSuccess -message $message
+    }
+    else {
+        PrintError -message $message
+        exit 1
+    }
+}
+
+function PrintError($message) {
+    Write-Host "  [✖] $message" -ForegroundColor Red
+}
+
+function PrintQuestion($message) {
+    Write-Host "  [?] $message" -ForegroundColor Yellow -NoNewline
+}
+
+function PrintSuccess($message) {
+    Write-Host "  [✔] $message" -ForegroundColor Green
+}
+
+function ReadLink($path) {
+    return (Get-Item -LiteralPath $path).Target
+}
 function main() {
     Set-StrictMode -Version Latest
-
+    if (GetOs -ne "windows") {
+        PrintError -message "Please run on Windows."
+        exit 1
+    }
     $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
     if (!$currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
         $me = $MyInvocation.MyCommand
@@ -30,12 +89,26 @@ function main() {
 
     # dotfiles
     Get-ChildItem -File -Filter ".*" -Force | 
-    ForEach-Object { 
+    ForEach-Object {
         $sourceFile = $_.FullName
         $targetFile = "$env:UserProfile\$($_.name)"
-        cmd.exe /c mklink $targetFile $sourceFile
-        if ($?) {
-            "$targetFile → $sourceFile"
+        if (Test-Path "$targetFile") {
+            if ((ReadLink -path $targetFile) -ne $sourceFile) {
+                $answer = AskConfirmation -message "'$targetFile' already exists, do you want to overwrite it?"
+                if (AnswerIsYes -answer $answer) {
+                    Remove-Item -LiteralPath "$targetFile" -Force > $null
+                    Execute -command "cmd.exe /c mklink '$targetFile' '$sourceFile'" -message "$targetFile → $sourceFile"
+                }
+                else {
+                    PrintError -message "$targetFile → $sourceFile"
+                }
+            }
+            else {
+                PrintSuccess -message "$targetFile → $sourceFile"
+            }
+        }
+        else {
+            Execute -command "cmd.exe /c mklink '$targetFile' '$sourceFile'" -message "$targetFile → $sourceFile"
         }
     }
 
@@ -46,14 +119,14 @@ function main() {
 
         # create folder tree
         $targetFolder = $dir_root.Replace("/home", "").Replace("\home", "").Replace($current, $env:UserProfile)
-        if (!(Test-Path -Path $targetFolder)) {
-            mkdir -Path $targetFolder
+        if (!(Test-Path -LiteralPath "$targetFolder")) {
+            mkdir -LiteralPath "$targetFolder" -Force
         }
         Get-ChildItem -LiteralPath $dir_root -Directory -Recurse |
         ForEach-Object {
             $targetFolder = $dir_root.Replace("/home", "").Replace("\home", "").Replace($current, $env:UserProfile)
-            if (!(Test-Path -Path $targetFolder)) {
-                mkdir -Path $targetFolder
+            if (!(Test-Path -LiteralPath "$targetFolder")) {
+                mkdir -LiteralPath "$targetFolder" -Force
             }
         }
 
@@ -62,11 +135,23 @@ function main() {
         ForEach-Object {
             $sourceFile = $_.FullName
             $targetFile = $sourceFile.Replace("/home", "").Replace("\home", "").Replace($current, $env:UserProfile)
-            if (!(Test-Path -Path $targetFile)) {
-                cmd.exe /c mklink "$targetFile" "$sourceFile"
-                if ($?) {
-                    "$targetFile → $sourceFile"
+            if (Test-Path -Path $targetFile) {
+                if ((ReadLink -path "$targetFile") -ne $sourceFile) {
+                    $answer = AskConfirmation -message "'$targetFile' already exists, do you want to overwrite it?"
+                    if (AnswerIsYes -answer $answer) {
+                        Remove-Item -LiteralPath "$targetFile" -Force > $null
+                        Execute -command "cmd.exe /c mklink '$targetFile' '$sourceFile'" -message "$targetFile → $sourceFile"
+                    }
+                    else {
+                        PrintError -message "$targetFile → $sourceFile"
+                    }
                 }
+                else {
+                    PrintSuccess -message "$targetFile → $sourceFile"
+                }
+            }
+            else {
+                Execute -command "cmd.exe /c mklink '$targetFile' '$sourceFile'" -message "$targetFile → $sourceFile"
             }
         }
     }
