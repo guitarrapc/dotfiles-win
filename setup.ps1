@@ -31,7 +31,9 @@ function main() {
     # dotfiles
     Get-ChildItem -File -Filter ".*" -Force | 
     ForEach-Object { 
-        cmd.exe /c mklink "$env:UserProfile\$($_.name)" $_.FullName 
+        $sourceFile = $_.FullName
+        $targetFile = "$env:UserProfile\$($_.name)"
+        cmd.exe /c mklink $targetFile $sourceFile
         if ($?) {
             "$targetFile → $sourceFile"
         }
