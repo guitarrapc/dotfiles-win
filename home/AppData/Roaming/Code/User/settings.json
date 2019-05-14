@@ -3,7 +3,6 @@
     "explorer.confirmDragAndDrop": false,
     "window.zoomLevel": 0,
     "breadcrumbs.enabled": true,
-    "editor.fontFamily": "DejaVuSansMono",
     "go.toolsEnvVars": {
         "GO111MODULE": "on"
     },
@@ -12,5 +11,6 @@
     "[terraform]": {
         "editor.formatOnSave": true
     },
-    "terminal.integrated.rendererType": "dom"
+    "terminal.integrated.rendererType": "dom",
+    "editor.fontFamily": "'DejaVu Sans Mono - Bront', Consolas, 'Courier New', monospace"
 }
