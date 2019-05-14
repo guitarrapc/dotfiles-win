@@ -1,0 +1,16 @@
+{
+    "git.enableSmartCommit": true,
+    "explorer.confirmDragAndDrop": false,
+    "window.zoomLevel": 0,
+    "breadcrumbs.enabled": true,
+    "editor.fontFamily": "DejaVuSansMono",
+    "go.toolsEnvVars": {
+        "GO111MODULE": "on"
+    },
+    "go.formatTool": "goimports",
+    "editor.formatOnSave": true,
+    "[terraform]": {
+        "editor.formatOnSave": true
+    },
+    "terminal.integrated.rendererType": "dom"
+}
