@@ -94,13 +94,13 @@ function main() {
         # create folder tree
         $targetFolder = $dir_root.Replace("/home", "").Replace("\home", "").Replace($current, $env:UserProfile)
         if (!(Test-Path -LiteralPath "$targetFolder")) {
-            mkdir -LiteralPath "$targetFolder" -Force
+            mkdir -Path "$targetFolder" -Force > $null
         }
         Get-ChildItem -LiteralPath $dir_root -Directory -Recurse |
         ForEach-Object {
             $targetFolder = $dir_root.Replace("/home", "").Replace("\home", "").Replace($current, $env:UserProfile)
             if (!(Test-Path -LiteralPath "$targetFolder")) {
-                mkdir -LiteralPath "$targetFolder" -Force
+                mkdir -Path "$targetFolder" -Force > $null
             }
         }
 
