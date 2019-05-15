@@ -1,6 +1,7 @@
 [user]
-	name = Ikiru Yoshizaki
-	email = guitarrapc@users.noreply.github.com
+	name = guitarrapc
+	email = 3856350+guitarrapc@users.noreply.github.com
+	signingKey = ""
 [core]
 	excludesfile = ~/.gitignore_global
 	attributesfile = ~/.gitattributes
@@ -15,6 +16,7 @@
 	browser = chromium
 [commit]
 	template = .stCommitMsg
+	gpgSign = false
 [push]
 	default = current
 	followTags = true
@@ -66,3 +68,7 @@
 	# hub alias
     pr = pull-requests
 	see = browse
+[gpg]
+	program = gpg
+[tag]
+	forceSignAnnotated = false
