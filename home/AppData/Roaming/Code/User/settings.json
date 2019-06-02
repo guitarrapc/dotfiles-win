@@ -12,5 +12,6 @@
         "editor.formatOnSave": true
     },
     "terminal.integrated.rendererType": "dom",
+    "editor.detectIndentation": false,
     "editor.fontFamily": "'DejaVu Sans Mono - Bront', Consolas, 'Courier New', monospace"
 }
