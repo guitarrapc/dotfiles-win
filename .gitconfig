@@ -10,6 +10,7 @@
 	autocrlf = true
 	symlinks = true
 	filemode = false
+    longpaths = true
 [gui]
 	encoding = utf-8
 [web]
