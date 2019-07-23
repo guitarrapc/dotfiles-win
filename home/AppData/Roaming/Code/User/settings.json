@@ -11,6 +11,9 @@
     "[terraform]": {
         "editor.formatOnSave": true
     },
+    "[json]": {
+        "editor.tabSize": 2
+    }
     "terminal.integrated.rendererType": "dom",
     "editor.detectIndentation": false,
     "editor.fontFamily": "'DejaVu Sans Mono - Bront', Consolas, 'Courier New', monospace"
