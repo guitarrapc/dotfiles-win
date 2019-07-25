@@ -16,5 +16,6 @@
     }
     "terminal.integrated.rendererType": "dom",
     "editor.detectIndentation": false,
-    "editor.fontFamily": "'DejaVu Sans Mono - Bront', Consolas, 'Courier New', monospace"
+    "editor.fontFamily": "'DejaVu Sans Mono - Bront', Consolas, 'Courier New', monospace",
+    "workbench.colorTheme": "Complete Dark"
 }
