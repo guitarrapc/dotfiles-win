@@ -10,7 +10,8 @@
 	autocrlf = true
 	symlinks = true
 	filemode = false
-    longpaths = true
+	longpaths = true
+	ignorecase = false
 [gui]
 	encoding = utf-8
 [web]
@@ -67,7 +68,7 @@
 	required = true
 [alias]
 	# hub alias
-    pr = pull-requests
+	pr = pull-requests
 	see = browse
 [gpg]
 	program = gpg

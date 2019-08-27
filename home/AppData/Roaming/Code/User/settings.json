@@ -22,5 +22,6 @@
     "explorer.confirmDragAndDrop": false,
     "git.enableSmartCommit": true,
     "terminal.integrated.rendererType": "dom",
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Complete Dark"
 }
