@@ -1,20 +1,26 @@
 {
-    "git.enableSmartCommit": true,
-    "explorer.confirmDragAndDrop": false,
-    "window.zoomLevel": 0,
-    "breadcrumbs.enabled": true,
     "go.toolsEnvVars": {
         "GO111MODULE": "on"
     },
     "go.formatTool": "goimports",
-    "editor.formatOnSave": true,
     "[terraform]": {
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "files.insertFinalNewline": true,
     },
     "[json]": {
-        "editor.tabSize": 2
-    }
-    "terminal.integrated.rendererType": "dom",
+        "editor.tabSize": 2,
+        "files.insertFinalNewline": true,
+    },
+    "[yaml]": {
+        "editor.tabSize": 2,
+        "files.insertFinalNewline": true,
+    },
+    "breadcrumbs.enabled": true,
+    "editor.formatOnSave": true,
     "editor.detectIndentation": false,
-    "editor.fontFamily": "'DejaVu Sans Mono - Bront', Consolas, 'Courier New', monospace"
+    "editor.fontFamily": "'DejaVu Sans Mono - Bront', Consolas, 'Courier New', monospace",
+    "explorer.confirmDragAndDrop": false,
+    "git.enableSmartCommit": true,
+    "terminal.integrated.rendererType": "dom",
+    "window.zoomLevel": 0
 }
