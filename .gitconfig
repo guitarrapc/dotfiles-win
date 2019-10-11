@@ -70,6 +70,16 @@
 	# hub alias
 	pr = pull-requests
 	see = browse
+    # alias command
+    aliaslist = !"loop=; for k in `git config --get-regexp '^alias.' | sed -e 's/^alias.\\([^ ]*\\) .*$/\\1/g' | sort`; do printf ${k}; loop=${loop}1; if test ${#loop} -lt 5; then printf '\t'; else echo ''; loop=; fi; done"
+    aliasdoc = "!sh -c \"git config --get-regexp '^alias.' | grep '^alias.$1\\ ' | sed -e 's/^alias.$1/$1 =/g'\""
+    alias = "!sh -c \"if test -z $1; then git aliaslist; else git aliasdoc $1; fi\""
+    conflicts = diff --name-only --diff-filter=U
+    diffbranch = show-branch --topo-order
+    branchjunction = show-branch --merge-base
+    contains = branch -a --contains
+    rm-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+    showfile = "!sh -c 'git show $0:$1'"
 [gpg]
 	program = gpg
 [tag]
