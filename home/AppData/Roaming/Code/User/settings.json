@@ -25,7 +25,7 @@
     "window.zoomLevel": 0,
     "workbench.colorTheme": "Complete Dark",
     "terraform.indexing": {
-        "enabled": true,
+        "enabled": false,
         "liveIndexing": false,
         "delay": 500,
         "exclude": [
@@ -34,7 +34,7 @@
         ]
     },
     "terraform.languageServer": {
-        "enabled": false,
+        "enabled": true,
         "args": []
     }
 }
