@@ -17,7 +17,6 @@
     },
     "breadcrumbs.enabled": true,
     "editor.formatOnSave": true,
-    "editor.detectIndentation": false,
     "editor.fontFamily": "'DejaVu Sans Mono - Bront', Consolas, 'Courier New', monospace",
     "explorer.confirmDragAndDrop": false,
     "git.enableSmartCommit": true,
