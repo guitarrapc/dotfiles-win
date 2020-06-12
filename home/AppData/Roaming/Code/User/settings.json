@@ -26,17 +26,11 @@
     "git.enableSmartCommit": true,
     "terminal.integrated.rendererType": "dom",
     "window.zoomLevel": 0,
-    "terraform.indexing": {
-        "enabled": false,
-        "liveIndexing": false,
-        "delay": 500,
-        "exclude": [
-            ".terraform/**/*",
-            "**/.terraform/**/*"
+    "go.useLanguageServer": true,
+    "terraform.languageServer": {
+        "external": true,
+        "args": [
+            "serve"
         ]
     },
-    "terraform.languageServer": {
-        "enabled": true,
-        "args": []
-    }
 }
