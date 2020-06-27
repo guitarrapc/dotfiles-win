@@ -28,6 +28,7 @@
     "window.zoomLevel": 0,
     "go.useLanguageServer": true,
     "terraform.languageServer": {
+        "trace.server": "messages",
         "external": true,
         "args": [
             "serve"
