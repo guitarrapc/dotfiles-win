@@ -32,5 +32,6 @@
         "args": [
             "serve"
         ]
-    }
+    },
+    "workbench.tree.indent": 12
 }
