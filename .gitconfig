@@ -84,3 +84,5 @@
 	program = gpg
 [tag]
 	forceSignAnnotated = false
+[lfs]
+	locksverify = false

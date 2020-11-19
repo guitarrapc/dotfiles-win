@@ -15,6 +15,10 @@
         "editor.tabSize": 2,
         "files.insertFinalNewline": true,
     },
+    "[yml]": {
+        "editor.tabSize": 2,
+        "files.insertFinalNewline": true,
+    },
     "breadcrumbs.enabled": true,
     "editor.formatOnSave": true,
     "editor.fontFamily": "'DejaVu Sans Mono - Bront', Consolas, 'Courier New', monospace",
@@ -22,17 +26,16 @@
     "git.enableSmartCommit": true,
     "terminal.integrated.rendererType": "dom",
     "window.zoomLevel": 0,
-    "workbench.colorTheme": "Complete Dark",
-    "terraform.indexing": {
-        "enabled": false,
-        "liveIndexing": false,
-        "delay": 500,
-        "exclude": [
-            ".terraform/**/*",
-            "**/.terraform/**/*"
+    "go.useLanguageServer": true,
+    "terraform.languageServer": {
+        "trace.server": "messages",
+        "external": true,
+        "args": [
+            "serve"
         ]
     },
-    "terraform.languageServer": {
-        "external": true
-    }
+    "workbench.tree.indent": 12,
+    "workbench.list.horizontalScrolling": true,
+    "workbench.list.smoothScrolling": true,
+    "workbench.tree.renderIndentGuides": "always"
 }
