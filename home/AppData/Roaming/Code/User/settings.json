@@ -3,6 +3,7 @@
         "GO111MODULE": "on"
     },
     "go.formatTool": "goimports",
+    "go.useLanguageServer": true,
     "[terraform]": {
         "editor.formatOnSave": true,
         "files.insertFinalNewline": true,
@@ -26,7 +27,6 @@
     "git.enableSmartCommit": true,
     "terminal.integrated.rendererType": "dom",
     "window.zoomLevel": 0,
-    "go.useLanguageServer": true,
     "terraform.languageServer": {
         "trace.server": "messages",
         "external": true,
