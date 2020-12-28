@@ -1,0 +1,22 @@
+root = true
+
+[*]
+charset = utf-8
+insert_final_newline = true
+indent_style = space
+trim_trailing_whitespace = true
+
+[home/.docker/daemon.json]
+indent_size = 2
+
+[.gitattributes]
+end_of_line = lf
+
+[.profile]
+end_of_line = lf
+
+[.profile]
+end_of_line = lf
+
+[config]
+end_of_line = lf

@@ -1,6 +1,28 @@
+#requires -version 5.1
 # use mklink + Developer mode on Windows10 can avoid admin elevate issue.
 
 Set-StrictMode -Version Latest
+
+function IsDeveloperMode() {
+    $val = $(Get-ItemPropertyValue registry::HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense)
+    if ($val -eq 1) {
+        Write-Host "Windows Developer mode is Enabled."
+    } else {
+        Write-Host "Windows Developer mode is Disabled, I recommend enabled developer mode to avoid symlink restriction."
+    }
+
+    return $val -eq 1
+}
+function IsEscalated() {
+    $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+    $val = $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+    if ($val) {
+        Write-Host "Script is executed in escalation."
+    } else {
+        Write-Host "Script is executed in non-escalation."
+    }
+    return $val
+}
 
 function AnswerIsYes($answer) {
     return $answer -eq "y"
@@ -62,7 +84,7 @@ function main() {
     $current = $(Get-Location).Path
 
     # dotfiles
-    Get-ChildItem -File -Filter ".*" -Force | Where-Object Name -notin @(".gitignore") |
+    Get-ChildItem -File -Filter ".*" -Force | Where-Object Name -notin @(".gitignore", ".gitattributes", ".editorconfig") |
     ForEach-Object {
         $sourceFile = $_.FullName
         $targetFile = "$env:UserProfile\$($_.name)"
@@ -87,7 +109,7 @@ function main() {
     }
 
     # home
-    Get-ChildItem -LiteralPath home -Directory -Force | 
+    Get-ChildItem -LiteralPath home -Directory -Force |
     ForEach-Object {
         $dir_root = $_.FullName
 
@@ -136,8 +158,7 @@ if ((GetOs) -ne "windows") {
     exit 1
 }
 
-$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-if (!$currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+if (!(IsDeveloperMode -or IsEscalated)) {
     $myfunction = $MyInvocation.InvocationName
     $cd = (Get-Location).Path
     $commands = "Set-Location $cd; $myfunction; Pause"
