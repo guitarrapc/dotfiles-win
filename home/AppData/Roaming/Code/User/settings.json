@@ -1,41 +1,42 @@
 {
-    "go.toolsEnvVars": {
-        "GO111MODULE": "on"
-    },
-    "go.formatTool": "goimports",
-    "go.useLanguageServer": true,
-    "[terraform]": {
-        "editor.formatOnSave": true,
-        "files.insertFinalNewline": true,
-    },
-    "[json]": {
-        "editor.tabSize": 2,
-        "files.insertFinalNewline": true,
-    },
-    "[yaml]": {
-        "editor.tabSize": 2,
-        "files.insertFinalNewline": true,
-    },
-    "[yml]": {
-        "editor.tabSize": 2,
-        "files.insertFinalNewline": true,
-    },
-    "breadcrumbs.enabled": true,
+  "workbench.tree.indent": 12,
+  "workbench.list.horizontalScrolling": true,
+  "workbench.list.smoothScrolling": true,
+  "workbench.tree.renderIndentGuides": "always",
+  "breadcrumbs.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.fontFamily": "'DejaVu Sans Mono - Bront', Consolas, 'Courier New', monospace",
+  "editor.detectIndentation": false,
+  "explorer.confirmDragAndDrop": false,
+  "git.enableSmartCommit": true,
+  "terminal.integrated.rendererType": "dom",
+  "window.zoomLevel": 0,
+  "terraform.languageServer": {
+    "trace.server": "messages",
+    "external": true,
+    "args": [
+      "serve"
+    ]
+  },
+  "go.toolsEnvVars": {
+    "GO111MODULE": "on"
+  },
+  "go.formatTool": "goimports",
+  "go.useLanguageServer": true,
+  "[terraform]": {
     "editor.formatOnSave": true,
-    "editor.fontFamily": "'DejaVu Sans Mono - Bront', Consolas, 'Courier New', monospace",
-    "explorer.confirmDragAndDrop": false,
-    "git.enableSmartCommit": true,
-    "terminal.integrated.rendererType": "dom",
-    "window.zoomLevel": 0,
-    "terraform.languageServer": {
-        "trace.server": "messages",
-        "external": true,
-        "args": [
-            "serve"
-        ]
-    },
-    "workbench.tree.indent": 12,
-    "workbench.list.horizontalScrolling": true,
-    "workbench.list.smoothScrolling": true,
-    "workbench.tree.renderIndentGuides": "always"
+    "files.insertFinalNewline": true,
+  },
+  "[json]": {
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": true,
+  },
+  "[yaml]": {
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": true,
+  },
+  "[yml]": {
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": true,
+  }
 }
