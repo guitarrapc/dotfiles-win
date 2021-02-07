@@ -31,6 +31,10 @@
     "editor.tabSize": 2,
     "files.insertFinalNewline": true,
   },
+  "[jsonc]": {
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": true,
+  },
   "[yaml]": {
     "editor.tabSize": 2,
     "files.insertFinalNewline": true,
