@@ -88,3 +88,5 @@
 	forceSignAnnotated = false
 [lfs]
 	locksverify = false
+[init]
+	defaultBranch = main
