@@ -22,6 +22,8 @@
 [push]
 	default = current
 	followTags = true
+[pull]
+	rebase = false
 [fetch]
 	# Auto-kill defunct remote branches
 	prune = true
