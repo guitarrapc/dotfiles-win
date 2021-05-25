@@ -28,7 +28,7 @@
 	# Auto-kill defunct remote branches
 	prune = true
 [credential]
-	helper = manager
+	helper = manager-core
 	# Let OS X remember our logins for us
 	# helper = osxkeychain
 [credential "https://source.developers.google.com"]
