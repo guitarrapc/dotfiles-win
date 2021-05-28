@@ -10,7 +10,6 @@
   "explorer.confirmDragAndDrop": false,
   "git.enableSmartCommit": true,
   "terminal.integrated.rendererType": "dom",
-  "window.zoomLevel": 0,
   "terraform.languageServer": {
     "trace.server": "messages",
     "external": true,
@@ -42,5 +41,6 @@
   "[yml]": {
     "editor.tabSize": 2,
     "files.insertFinalNewline": true,
-  }
+  },
+  "terminal.integrated.shell.windows": "${env:SystemRoot}\\System32\\cmd.exe"
 }
