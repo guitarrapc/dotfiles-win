@@ -42,5 +42,6 @@
     "editor.tabSize": 2,
     "files.insertFinalNewline": true,
   },
-  "terminal.integrated.shell.windows": "${env:SystemRoot}\\System32\\cmd.exe"
+  "terminal.integrated.shell.windows": "${env:SystemRoot}\\System32\\cmd.exe",
+  "redhat.telemetry.enabled": false
 }
