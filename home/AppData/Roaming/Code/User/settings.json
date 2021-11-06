@@ -5,7 +5,7 @@
   "workbench.tree.renderIndentGuides": "always",
   "breadcrumbs.enabled": true,
   "editor.formatOnSave": true,
-  "editor.fontFamily": "'DejaVu Sans Mono - Bront', 'Cascadia Code', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'DejaVu Sans Mono - Bront', 'Cascadia Mono', Consolas, 'Courier New', monospace",
   "editor.detectIndentation": false,
   "explorer.confirmDragAndDrop": false,
   "git.enableSmartCommit": true,
