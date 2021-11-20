@@ -4,12 +4,15 @@
   "workbench.list.smoothScrolling": true,
   "workbench.tree.renderIndentGuides": "always",
   "breadcrumbs.enabled": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.detectIndentation": false,
   "editor.formatOnSave": true,
   "editor.fontFamily": "'DejaVu Sans Mono - Bront', 'Cascadia Mono', Consolas, 'Courier New', monospace",
-  "editor.detectIndentation": false,
+  "editor.guides.bracketPairs": true,
   "explorer.confirmDragAndDrop": false,
   "git.enableSmartCommit": true,
-  "terminal.integrated.rendererType": "dom",
+  "redhat.telemetry.enabled": false,
+  "security.workspace.trust.untrustedFiles": "open",
   "terraform.languageServer": {
     "trace.server": "messages",
     "external": true,
@@ -22,16 +25,16 @@
   },
   "go.formatTool": "goimports",
   "go.useLanguageServer": true,
-  "[terraform]": {
-    "editor.formatOnSave": true,
-    "files.insertFinalNewline": true,
-  },
   "[json]": {
     "editor.tabSize": 2,
     "files.insertFinalNewline": true,
   },
   "[jsonc]": {
     "editor.tabSize": 2,
+    "files.insertFinalNewline": true,
+  },
+  "[terraform]": {
+    "editor.formatOnSave": true,
     "files.insertFinalNewline": true,
   },
   "[yaml]": {
@@ -41,8 +44,5 @@
   "[yml]": {
     "editor.tabSize": 2,
     "files.insertFinalNewline": true,
-  },
-  "terminal.integrated.shell.windows": "${env:SystemRoot}\\System32\\cmd.exe",
-  "redhat.telemetry.enabled": false,
-  "security.workspace.trust.untrustedFiles": "open"
+  }
 }
