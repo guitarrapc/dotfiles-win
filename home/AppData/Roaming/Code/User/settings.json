@@ -1,7 +1,9 @@
 {
-  "workbench.tree.indent": 12,
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.list.horizontalScrolling": true,
   "workbench.list.smoothScrolling": true,
+  "workbench.tree.indent": 12,
   "workbench.tree.renderIndentGuides": "always",
   "breadcrumbs.enabled": true,
   "editor.bracketPairColorization.enabled": true,
