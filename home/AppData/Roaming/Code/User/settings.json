@@ -9,6 +9,7 @@
   "editor.formatOnSave": true,
   "editor.fontFamily": "'DejaVu Sans Mono - Bront', 'Cascadia Mono', Consolas, 'Courier New', monospace",
   "editor.guides.bracketPairs": true,
+  "editor.linkedEditing": true,
   "explorer.confirmDragAndDrop": false,
   "git.enableSmartCommit": true,
   "redhat.telemetry.enabled": false,
