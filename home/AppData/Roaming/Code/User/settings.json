@@ -1,10 +1,4 @@
 {
-  "workbench.editor.enablePreview": false,
-  "workbench.editor.enablePreviewFromQuickOpen": false,
-  "workbench.list.horizontalScrolling": true,
-  "workbench.list.smoothScrolling": true,
-  "workbench.tree.indent": 12,
-  "workbench.tree.renderIndentGuides": "always",
   "breadcrumbs.enabled": true,
   "editor.bracketPairColorization.enabled": true,
   "editor.detectIndentation": false,
@@ -12,10 +6,21 @@
   "editor.fontFamily": "'DejaVu Sans Mono - Bront', 'Cascadia Mono', Consolas, 'Courier New', monospace",
   "editor.guides.bracketPairs": true,
   "editor.linkedEditing": true,
+  "editor.renderControlCharacters": true,
+  "editor.renderWhitespace": "boundary",
   "explorer.confirmDragAndDrop": false,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
   "git.enableSmartCommit": true,
+  "go.toolsEnvVars": {
+    "GO111MODULE": "on"
+  },
+  "go.formatTool": "goimports",
+  "go.useLanguageServer": true,
   "redhat.telemetry.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
+  "terminal.integrated.scrollback": 2000, // default 1000
   "terraform.languageServer": {
     "trace.server": "messages",
     "external": true,
@@ -23,11 +28,12 @@
       "serve"
     ]
   },
-  "go.toolsEnvVars": {
-    "GO111MODULE": "on"
-  },
-  "go.formatTool": "goimports",
-  "go.useLanguageServer": true,
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.list.horizontalScrolling": true,
+  "workbench.list.smoothScrolling": true,
+  "workbench.tree.indent": 12,
+  "workbench.tree.renderIndentGuides": "always",
   "[json]": {
     "editor.tabSize": 2,
     "files.insertFinalNewline": true,
