@@ -90,3 +90,5 @@
 	locksverify = false
 [init]
 	defaultBranch = main
+[credential "helperselector"]
+	selected = manager-core
