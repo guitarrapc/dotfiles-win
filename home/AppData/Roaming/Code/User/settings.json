@@ -8,6 +8,7 @@
   "editor.linkedEditing": true,
   "editor.renderControlCharacters": true,
   "editor.renderWhitespace": "boundary",
+  "editor.wordWrap": "on",
   "explorer.confirmDragAndDrop": false,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -34,24 +35,25 @@
   "workbench.list.smoothScrolling": true,
   "workbench.tree.indent": 12,
   "workbench.tree.renderIndentGuides": "always",
+  "[dockercompose]": {
+    // wait for vscode-docker 1.19 https://github.com/microsoft/vscode-docker/pull/3357
+    // due to compose-laguage-service internal settings. https://github.com/microsoft/compose-language-service/issues/70
+    "editor.formatOnSave": false,
+    "editor.tabSize": 4,
+  },
   "[json]": {
-    "editor.tabSize": 2,
-    "files.insertFinalNewline": true,
+    "editor.tabSize": 2
   },
   "[jsonc]": {
-    "editor.tabSize": 2,
-    "files.insertFinalNewline": true,
+    "editor.tabSize": 2
   },
   "[terraform]": {
-    "editor.formatOnSave": true,
-    "files.insertFinalNewline": true,
+    "editor.formatOnSave": true
   },
   "[yaml]": {
-    "editor.tabSize": 2,
-    "files.insertFinalNewline": true,
+    "editor.tabSize": 2
   },
   "[yml]": {
-    "editor.tabSize": 2,
-    "files.insertFinalNewline": true,
+    "editor.tabSize": 2
   }
 }
