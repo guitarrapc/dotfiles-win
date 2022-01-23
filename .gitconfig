@@ -92,3 +92,5 @@
 	defaultBranch = main
 [credential "helperselector"]
 	selected = manager-core
+[submodule]
+	recurse = true
