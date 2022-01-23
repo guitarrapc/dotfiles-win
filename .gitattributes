@@ -1,5 +1,8 @@
 *   text=auto
+.gitattributes text eol=lf
 .gitconfig text eol=lf
+.gitignore text eol=lf
+.gitignore_global text eol=lf
 .profile text eol=lf
 .wslconfig text eol=lf
 home/.docker/daemon.json text eol=lf
