@@ -39,7 +39,7 @@
     // wait for vscode-docker 1.19 https://github.com/microsoft/vscode-docker/pull/3357
     // due to compose-laguage-service internal settings. https://github.com/microsoft/compose-language-service/issues/70
     "editor.formatOnSave": false,
-    "editor.tabSize": 4,
+    "editor.tabSize": 4
   },
   "[json]": {
     "editor.tabSize": 2
