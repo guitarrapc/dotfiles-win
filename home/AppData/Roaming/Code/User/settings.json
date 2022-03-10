@@ -21,6 +21,7 @@
   "go.useLanguageServer": true,
   "redhat.telemetry.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "terminal.integrated.scrollback": 2000, // default 1000
   "terraform.languageServer": {
     "trace.server": "messages",
