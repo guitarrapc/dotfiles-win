@@ -97,3 +97,6 @@
 	current = green reverse
 	local = yellow
 	remote = green
+# diff
+[diff "sjis"]
+    textconv = "iconv -f sjis"
