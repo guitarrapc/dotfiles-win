@@ -55,6 +55,9 @@
 	recurse = true
 [tag]
 	forceSignAnnotated = false
+# use https on ssh address.
+[url "https://github.com/"]
+    insteadOf = git@github.com:
 [web]
 	browser = chromium
 # alias
