@@ -10,6 +10,7 @@
   "editor.renderWhitespace": "boundary",
   "editor.wordWrap": "on",
   "explorer.confirmDragAndDrop": false,
+  "files.autoGuessEncoding": true,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
