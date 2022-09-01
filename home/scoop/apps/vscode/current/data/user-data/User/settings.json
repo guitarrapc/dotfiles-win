@@ -3,11 +3,13 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.detectIndentation": false,
   "editor.formatOnSave": true,
-  "editor.fontFamily": "'DejaVu Sans Mono - Bront', 'Cascadia Mono', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'DejaVu Sans Mono - Bront', 'Cascadia Mono', 'SF Mono', Consolas, 'Courier New', monospace",
   "editor.guides.bracketPairs": true,
+  "editor.inlineSuggest.enabled": true,
   "editor.linkedEditing": true,
   "editor.renderControlCharacters": true,
   "editor.renderWhitespace": "boundary",
+  "editor.suggest.preview": true,
   "editor.wordWrap": "on",
   "explorer.confirmDragAndDrop": false,
   "files.autoGuessEncoding": true,
@@ -23,14 +25,7 @@
   "redhat.telemetry.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
   "terminal.integrated.defaultProfile.windows": "Command Prompt",
-  "terminal.integrated.scrollback": 2000, // default 1000
-  "terraform.languageServer": {
-    "trace.server": "messages",
-    "external": true,
-    "args": [
-      "serve"
-    ]
-  },
+  "terminal.integrated.scrollback": 2000,
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.list.horizontalScrolling": true,
@@ -50,12 +45,21 @@
     "editor.tabSize": 2
   },
   "[terraform]": {
-    "editor.formatOnSave": true
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
   },
   "[yaml]": {
     "editor.tabSize": 2
   },
   "[yml]": {
     "editor.tabSize": 2
-  }
+  },
+  "terraform.languageServer.enable": true,
+  "terraform.codelens.referenceCount": true
 }
