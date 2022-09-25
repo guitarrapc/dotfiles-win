@@ -6,10 +6,10 @@ dotfiles-win
 
 ## Run
 
-* `./setup.ps1` to setup symlink
+* `./install.ps1` to setup symlink
 
 ```shell
-PS> .\setup.ps1
+PS> .\install.ps1
 Windows Developer mode is Enabled.
   [o] C:\Users\guitarrapc\.gitconfig → C:\git\guitarrapc\dotfiles-win\.gitconfig
   [o] C:\Users\guitarrapc\.gitignore_global → C:\git\guitarrapc\dotfiles-win\.gitignore_global
