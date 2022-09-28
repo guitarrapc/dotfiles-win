@@ -68,6 +68,10 @@ function PrintError($message) {
     Write-Host "  [x] $message" -ForegroundColor Red
 }
 
+function PrintWarning($message) {
+    Write-Host "  [!] $message" -ForegroundColor Cyan
+}
+
 function PrintQuestion($message) {
     Write-Host "  [?] $message" -ForegroundColor Yellow -NoNewline
 }
@@ -89,22 +93,22 @@ function main() {
         $sourceFile = $_.FullName
         $targetFile = "$env:UserProfile\$($_.name)"
         if (Test-Path "$targetFile") {
-            if ((ReadLink -path $targetFile) -ne $sourceFile) {
+            if ((ReadLink -path $targetFile) -ne "$sourceFile") {
                 $answer = AskConfirmation -message "'$targetFile' already exists, do you want to overwrite it?"
                 if (AnswerIsYes -answer $answer) {
                     Remove-Item -LiteralPath "$targetFile" -Force > $null
-                    Execute -command "cmd.exe /c mklink '$targetFile' '$sourceFile'" -message "$targetFile → $sourceFile"
+                    Execute -command "cmd.exe /c mklink '$targetFile' '$sourceFile'" -message "'$targetFile' → '$sourceFile'"
                 }
                 else {
-                    PrintError -message "$targetFile → $sourceFile"
+                    PrintError -message "'$targetFile' → '$sourceFile'"
                 }
             }
             else {
-                PrintSuccess -message "$targetFile → $sourceFile"
+                PrintSuccess -message "'$targetFile' → '$sourceFile'"
             }
         }
         else {
-            Execute -command "cmd.exe /c mklink '$targetFile' '$sourceFile'" -message "$targetFile → $sourceFile"
+            Execute -command "cmd.exe /c mklink '$targetFile' '$sourceFile'" -message "'$targetFile' → '$sourceFile'"
         }
     }
 
@@ -113,37 +117,32 @@ function main() {
     ForEach-Object {
         $dir_root = $_.FullName
 
-        # create folder tree
-        $targetFolder = $dir_root.Replace("/home", "").Replace("\home", "").Replace($current, $env:UserProfile)
-        if (!(Test-Path -LiteralPath "$targetFolder")) {
-            mkdir -Path "$targetFolder" -Force > $null
-        }
-        Get-ChildItem -LiteralPath $dir_root -Directory -Recurse |
-        ForEach-Object {
-            $targetFolder = $dir_root.Replace("/home", "").Replace("\home", "").Replace($current, $env:UserProfile)
-            if (!(Test-Path -LiteralPath "$targetFolder")) {
-                mkdir -Path "$targetFolder" -Force > $null
-            }
-        }
-
-        # synlink files
-        Get-ChildItem -LiteralPath $dir_root -File -Force -Recurse |
+        Get-ChildItem -LiteralPath "$dir_root" -File -Force -Recurse |
         ForEach-Object {
             $sourceFile = $_.FullName
             $targetFile = $sourceFile.Replace("/home", "").Replace("\home", "").Replace($current, $env:UserProfile)
-            if (Test-Path -Path $targetFile) {
-                if ((ReadLink -path "$targetFile") -ne $sourceFile) {
+            $parentDir = [System.IO.Path]::GetDirectoryName("$targetFile");
+
+            # create folder tree
+            if (!(Test-Path -Path "$parentDir"))
+            {
+                mkdir -Path "$parentDir" -Force > $null
+            }
+
+            # synlink files
+            if (Test-Path -Path "$targetFile") {
+                if ((ReadLink -path "$targetFile") -ne "$sourceFile") {
                     $answer = AskConfirmation -message "'$targetFile' already exists, do you want to overwrite it?"
                     if (AnswerIsYes -answer $answer) {
                         Remove-Item -LiteralPath "$targetFile" -Force > $null
-                        Execute -command "cmd.exe /c mklink '$targetFile' '$sourceFile'" -message "$targetFile → $sourceFile"
+                        Execute -command "cmd.exe /c mklink '$targetFile' '$sourceFile'" -message "'$targetFile' → '$sourceFile'"
                     }
                     else {
-                        PrintError -message "$targetFile → $sourceFile"
+                        PrintError -message "'$targetFile' → '$sourceFile'"
                     }
                 }
                 else {
-                    PrintSuccess -message "$targetFile → $sourceFile"
+                    PrintSuccess -message "'$targetFile' → '$sourceFile'"
                 }
             }
             else {
