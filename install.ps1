@@ -1,14 +1,14 @@
 #requires -version 5.1
-# use mklink + Developer mode on Windows10 can avoid admin elevate issue.
+# use mklink + Developer mode on Windows10 (and higher) can avoid admin elevate issue.
 
 Set-StrictMode -Version Latest
 
 function IsDeveloperMode() {
     $val = $(Get-ItemPropertyValue registry::HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense)
     if ($val -eq 1) {
-        Write-Host "Windows Developer mode is Enabled."
+        Write-Host "Great, Windows Developer mode is Enabled."
     } else {
-        Write-Host "Windows Developer mode is Disabled, I recommend enabled developer mode to avoid symlink restriction."
+        Write-Host "Windows Developer mode is Disabled, I recommend enable developer mode to avoid symlink restriction." -ForegroundColor Red
     }
 
     return $val -eq 1
