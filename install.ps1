@@ -129,7 +129,7 @@ function main() {
                 mkdir -Path "$parentDir" -Force > $null
             }
 
-            # synlink files
+            # synbolic link file
             if (Test-Path -Path "$targetFile") {
                 if ((ReadLink -path "$targetFile") -ne "$sourceFile") {
                     $answer = AskConfirmation -message "'$targetFile' already exists, do you want to overwrite it?"
