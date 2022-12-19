@@ -8,7 +8,7 @@
   "editor.inlineSuggest.enabled": true,
   "editor.linkedEditing": true,
   "editor.renderControlCharacters": true,
-  "editor.renderWhitespace": "boundary",
+  "editor.renderWhitespace": "all",
   "editor.suggest.preview": true,
   "editor.wordWrap": "on",
   "explorer.confirmDragAndDrop": false,
@@ -39,7 +39,7 @@
     "editor.tabSize": 4
   },
   "[json]": {
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
   },
   "[jsonc]": {
     "editor.tabSize": 2
