@@ -27,11 +27,11 @@
 	# template = .stCommitMsg
 	gpgSign = false
 [credential]
-	helper = manager-core
+	helper = manager
 	# Let OS X remember our logins for us
 	# helper = osxkeychain
 [credential "helperselector"]
-	selected = manager-core
+	selected = manager
 [credential "https://source.developers.google.com"]
 	useHttpPath = true
 [fetch]
