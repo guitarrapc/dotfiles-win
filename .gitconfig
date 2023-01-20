@@ -51,6 +51,8 @@
 [push]
 	default = current
 	followTags = true
+	# enable git push --force-if-includes
+	useForceIfIncludes = true
 [submodule]
 	recurse = true
 [tag]
