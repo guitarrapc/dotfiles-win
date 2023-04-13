@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install dotfiles
-        run: . ./install.ps1 --force "${{ matrix.force }}"
+        run: . ./install.ps1 -Force "${{ matrix.force }}"
       - name: Show "$HOME"
         shell: bash
         run: ls -la "$HOME"
