@@ -1,6 +1,12 @@
 #requires -version 5.1
 # use mklink + Developer mode on Windows10 (and higher) can avoid admin elevate issue.
 
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory=$false, HelpMessage="Force to overwrite existing files.")]
+    [switch]$Force = $false
+)
+
 Set-StrictMode -Version Latest
 
 function IsDeveloperMode() {
@@ -28,6 +34,9 @@ function AnswerIsYes($answer) {
     return $answer -eq "y"
 }
 function AskConfirmation($message) {
+    if ($Force) {
+        return "y"
+    }
     PrintQuestion -message "$message (y/n) "
     $result = Read-Host
     return $result
