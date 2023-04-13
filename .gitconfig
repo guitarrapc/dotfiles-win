@@ -2,8 +2,6 @@
 	name = Ikiru Yoshizaki
 	email = 3856350+guitarrapc@users.noreply.github.com
 	signingKey = ""
-[column]
-	ui = auto
 [core]
 	excludesfile = ~/.gitignore_global
 	attributesfile = ~/.gitattributes
@@ -14,55 +12,8 @@
 	filemode = false
 	longpaths = true
 	ignorecase = false
-[gpg]
-	program = gpg
-[gui]
-	encoding = utf-8
-[include]
-	path = .gitconfig.local
-[init]
-	defaultBranch = main
-[commit]
-	#  no template
-	# template = .stCommitMsg
-	gpgSign = false
-[credential]
-	helper = manager
-	# Let OS X remember our logins for us
-	# helper = osxkeychain
-[credential "helperselector"]
-	selected = manager
-[credential "https://source.developers.google.com"]
-	useHttpPath = true
-[fetch]
-	# Auto-kill defunct remote branches
-	prune = true
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge --skip -- %f
-	process = git-lfs filter-process --skip
-	required = true
-[help]
-	autocorrect = 1
-[lfs]
-	locksverify = false
-[pull]
-	rebase = false
-[push]
-	default = current
-	followTags = true
-	# enable git push --force-if-includes
-	useForceIfIncludes = true
-[submodule]
-	recurse = true
-[tag]
-	forceSignAnnotated = false
-# use https on ssh address.
-[url "https://github.com/"]
-    insteadOf = git@github.com:
-[web]
-	browser = chromium
-# alias
+
+# -- other settings -- #
 [alias]
 	# hub alias
 	pr = pull-requests
@@ -71,10 +22,10 @@
 	aliaslist = !"loop=; for k in `git config --get-regexp '^alias.' | sed -e 's/^alias.\\([^ ]*\\) .*$/\\1/g' | sort`; do printf ${k}; loop=${loop}1; if test ${#loop} -lt 5; then printf '\t'; else echo ''; loop=; fi; done"
 	aliasdoc = "!sh -c \"git config --get-regexp '^alias.' | grep '^alias.$1\\ ' | sed -e 's/^alias.$1/$1 =/g'\""
 	alias = "!sh -c \"if test -z $1; then git aliaslist; else git aliasdoc $1; fi\""
-	conflicts = diff --name-only --diff-filter=U
-	diffbranch = show-branch --topo-order
 	branchjunction = show-branch --merge-base
+	conflicts = diff --name-only --diff-filter=U
 	contains = branch -a --contains
+	diffbranch = show-branch --topo-order
 	rm-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
 	showfile = "!sh -c 'git show $0:$1'"
 # color
@@ -102,6 +53,55 @@
 	current = green reverse
 	local = yellow
 	remote = green
+[column]
+	ui = auto
+[commit]
+	#  no template
+	# template = .stCommitMsg
+	gpgSign = false
+# credential
+[credential]
+	helper = manager
+[credential "helperselector"]
+	selected = manager
+[credential "https://source.developers.google.com"]
+	useHttpPath = true
 # diff
 [diff "sjis"]
-    textconv = "iconv -f sjis"
+	textconv = "iconv -f sjis"
+[fetch]
+	# Auto-kill defunct remote branches
+	prune = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge --skip -- %f
+	process = git-lfs filter-process --skip
+	required = true
+[gpg]
+	program = gpg
+[gui]
+	encoding = utf-8
+[include]
+	path = .gitconfig.local
+[init]
+	defaultBranch = main
+[help]
+	autocorrect = 1
+[lfs]
+	locksverify = false
+[pull]
+	rebase = false
+[push]
+	default = current
+	followTags = true
+	# enable git push --force-if-includes
+	useForceIfIncludes = true
+[submodule]
+	recurse = true
+[tag]
+	forceSignAnnotated = false
+# use https on ssh address.
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+[web]
+	browser = chromium
