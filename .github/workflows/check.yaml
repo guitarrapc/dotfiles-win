@@ -27,7 +27,7 @@ jobs:
         shell: bash
         run: |
           set -eo pipefail
-          workspace=printf '/%s\n' "${{ github.workspace }}" | tr '\' '/' | tr -d ':' | tr "[:upper:]" "[:lower:]"
+          workspace="/$(printf '%s\n' "${{ github.workspace }}" | tr '\' '/' | tr -d ':' | tr "[:upper:]" "[:lower:]")"
           ls -la "$HOME" | grep .gitconfig | grep "${workspace}/.gitconfig"
           ls -la "$HOME" | grep .gitignore_global | grep "${workspace}/.gitignore_global"
           if [[ "${{ matrix.force }}" == "n" ]]; then
