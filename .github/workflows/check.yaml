@@ -34,4 +34,4 @@ jobs:
             docker_grep_arg="-v"
           fi
           ls -la "$HOME/.docker" | grep config.json | grep ${docker_grep_arg} "${workspace}/home/.docker/config.json"
-          ls -la "$HOME/.ssh" | grep config.json | grep "${workspace}/home/.ssh/config"
+          ls -la "$HOME/.ssh" | grep config | grep "${workspace}/home/.ssh/config"
