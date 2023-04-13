@@ -27,10 +27,11 @@ jobs:
         shell: bash
         run: |
           set -eo pipefail
-          ls -la "$HOME" | grep .gitconfig | grep "${{ github.workspace }}/.gitconfig"
-          ls -la "$HOME" | grep .gitignore_global | grep "${{ github.workspace }}/.gitignore_global"
+          workspace=printf '/%s\n' "${{ github.workspace }}" | tr '\' '/' | tr -d ':' | tr "[:upper:]" "[:lower:]"
+          ls -la "$HOME" | grep .gitconfig | grep "${workspace}/.gitconfig"
+          ls -la "$HOME" | grep .gitignore_global | grep "${workspace}/.gitignore_global"
           if [[ "${{ matrix.force }}" == "n" ]]; then
             docker_grep_arg="-v"
           fi
-          ls -la "$HOME/.docker" | grep config.json | grep ${docker_grep_arg} "${{ github.workspace }}/HOME/.docker/config.json"
-          ls -la "$HOME/.ssh" | grep config.json | grep "${{ github.workspace }}/home/.ssh/config"
+          ls -la "$HOME/.docker" | grep config.json | grep ${docker_grep_arg} "${workspace}/HOME/.docker/config.json"
+          ls -la "$HOME/.ssh" | grep config.json | grep "${workspace}/home/.ssh/config"
