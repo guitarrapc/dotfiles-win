@@ -26,12 +26,12 @@ jobs:
       - name: Test installed files
         shell: bash
         run: |
-          set -eo pipefail
+          set -exo pipefail
           workspace="/$(printf '%s\n' "${{ github.workspace }}" | tr '\' '/' | tr -d ':' | tr "[:upper:]" "[:lower:]")"
           ls -la "$HOME" | grep .gitconfig | grep "${workspace}/.gitconfig"
           ls -la "$HOME" | grep .gitignore_global | grep "${workspace}/.gitignore_global"
           if [[ "${{ matrix.force }}" == "n" ]]; then
             docker_grep_arg="-v"
           fi
-          ls -la "$HOME/.docker" | grep config.json | grep ${docker_grep_arg} "${workspace}/home/.docker/config.json"
+          ls -la "$HOME/.docker" | grep daemon.json | grep ${docker_grep_arg} "${workspace}/home/.docker/daemon.json"
           ls -la "$HOME/.ssh" | grep config | grep "${workspace}/home/.ssh/config"
