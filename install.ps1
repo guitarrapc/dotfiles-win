@@ -4,7 +4,8 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$false, HelpMessage="Force to overwrite existing files.")]
-    [switch]$Force = $false
+    [ValidateSet("y", "n")]
+    [string]$Force
 )
 
 Set-StrictMode -Version Latest
@@ -34,8 +35,8 @@ function AnswerIsYes($answer) {
     return $answer -eq "y"
 }
 function AskConfirmation($message) {
-    if ($Force) {
-        return "y"
+    if ($Force -ne "") {
+        return $Force
     }
     PrintQuestion -message "$message (y/n) "
     $result = Read-Host

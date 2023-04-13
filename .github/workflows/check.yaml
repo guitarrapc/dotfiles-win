@@ -13,13 +13,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        force: ["$true", "$false"]
+        force: ["y", "n"]
     runs-on: windows-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
       - name: Install dotfiles
-        run: . ./install.ps1 --force:${{ matrix.force }}
+        run: . ./install.ps1 --force "${{ matrix.force }}"
       - name: Show "$HOME"
         shell: bash
         run: ls -la "$HOME"
