@@ -61,5 +61,8 @@
     "editor.tabSize": 2
   },
   "terraform.languageServer.enable": true,
-  "terraform.codelens.referenceCount": true
+  "terraform.codelens.referenceCount": true,
+  "[python]": {
+    "editor.formatOnType": true
+  }
 }
