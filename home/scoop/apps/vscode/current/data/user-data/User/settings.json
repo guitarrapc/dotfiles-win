@@ -7,6 +7,7 @@
   "editor.guides.bracketPairs": true,
   "editor.inlineSuggest.enabled": true,
   "editor.linkedEditing": true,
+  "editor.mouseWheelZoom": true,
   "editor.renderControlCharacters": true,
   "editor.renderWhitespace": "all",
   "editor.suggest.preview": true,
