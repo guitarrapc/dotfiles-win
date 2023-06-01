@@ -3,7 +3,7 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.detectIndentation": false,
   "editor.formatOnSave": true,
-  "editor.fontFamily": "'DejaVu Sans Mono - Bront', 'Cascadia Mono', 'SF Mono', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'Cascadia Mono', 'SF Mono', 'Consolas', 'Courier New', 'monospace'",
   "editor.guides.bracketPairs": true,
   "editor.inlineSuggest.enabled": true,
   "editor.linkedEditing": true,
