@@ -66,4 +66,10 @@
   },
   // see: https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform#configuration
   "terraform.codelens.referenceCount": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
 }
