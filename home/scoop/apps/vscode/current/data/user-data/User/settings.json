@@ -3,7 +3,7 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.detectIndentation": false,
   "editor.formatOnSave": true,
-  "editor.fontFamily": "'DejaVu Sans Mono - Bront', 'Cascadia Mono', 'SF Mono', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'Cascadia Mono', 'SF Mono', 'Consolas', 'Courier New', 'monospace'",
   "editor.guides.bracketPairs": true,
   "editor.inlineSuggest.enabled": true,
   "editor.linkedEditing": true,
@@ -45,6 +45,9 @@
   "[jsonc]": {
     "editor.tabSize": 2
   },
+  "[python]": {
+    "editor.formatOnType": true
+  },
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform",
     "editor.formatOnSave": true,
@@ -61,9 +64,13 @@
   "[yml]": {
     "editor.tabSize": 2
   },
-  "terraform.languageServer.enable": true,
+  // see: https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform#configuration
   "terraform.codelens.referenceCount": true,
-  "[python]": {
-    "editor.formatOnType": true
-  }
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
+  "go.toolsManagement.autoUpdate": true,
 }
