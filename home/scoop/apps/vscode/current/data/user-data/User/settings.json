@@ -72,5 +72,6 @@
     "GO111MODULE": "on"
   },
   "go.useLanguageServer": true,
-  "terraform.codelens.referenceCount": true
+  "terraform.codelens.referenceCount": true,
+  "textlint.autoFixOnSave": true
 }
