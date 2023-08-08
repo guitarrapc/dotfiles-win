@@ -1,0 +1,20 @@
+{
+  "plugins": {},
+  "filters": {},
+  "rules": {
+    "no-mixed-zenkaku-and-hankaku-alphabet": true,
+    "preset-ja-spacing": {
+      "ja-nakaguro-or-halfwidth-space-between-katakana": true,
+      "ja-no-space-around-parentheses": true,
+      "ja-no-space-between-full-width": true,
+      "ja-space-between-half-and-full-width": {
+        "space": "never"
+      },
+      "ja-space-after-exclamation": false,
+      "ja-space-after-question": false,
+      "ja-space-around-code": true,
+      "ja-space-around-link": true
+    },
+    "spellcheck-tech-word": true
+  }
+}
