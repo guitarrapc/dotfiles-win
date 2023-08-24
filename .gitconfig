@@ -79,6 +79,7 @@
 	required = true
 [gpg]
 	program = gpg
+	format = openpgp
 [gui]
 	encoding = utf-8
 [include]
@@ -105,3 +106,6 @@
 	insteadOf = git@github.com:
 [web]
 	browser = chromium
+[gpg "ssh"]
+	program = ssh-keygen
+	allowedSignersFile = ""
