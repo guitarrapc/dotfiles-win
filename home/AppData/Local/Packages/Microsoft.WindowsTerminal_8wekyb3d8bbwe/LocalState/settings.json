@@ -93,13 +93,13 @@
                 "source": "VSDebugConsole"
             },
             {
-                "guid": "{8a99aa53-f23e-5fef-a84b-f66d423346cd}",
+                "guid": "{8671d364-4dcb-52ea-ace1-c8e16fd60efd}",
                 "hidden": false,
                 "name": "Developer Command Prompt for VS 2022 [Preview]",
                 "source": "Windows.Terminal.VisualStudio"
             },
             {
-                "guid": "{37b3d3a0-8f15-52c8-8c0d-6649ae2e92d1}",
+                "guid": "{a147df8c-c371-54cd-b555-35333eb3a824}",
                 "hidden": false,
                 "name": "Developer PowerShell for VS 2022 [Preview]",
                 "source": "Windows.Terminal.VisualStudio"
