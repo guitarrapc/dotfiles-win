@@ -73,5 +73,6 @@
   },
   "go.useLanguageServer": true,
   "terraform.codelens.referenceCount": true,
-  "textlint.autoFixOnSave": true
+  "textlint.autoFixOnSave": true,
+  "window.menuBarVisibility": "compact"
 }
