@@ -59,10 +59,12 @@
 	#  no template
 	# template = .stCommitMsg
 	gpgSign = false
-# credential
+# credential (blank helper line see: https://github.com/cli/cli/issues/3796#issuecomment-1064685471)
 [credential "https://github.com"]
+	helper =
 	helper = !'gh.exe' auth git-credential
 [credential "https://gist.github.com"]
+	helper =
 	helper = !'gh.exe' auth git-credential
 # [credential]
 # 	helper = manager
