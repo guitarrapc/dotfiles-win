@@ -60,12 +60,14 @@
 	# template = .stCommitMsg
 	gpgSign = false
 # credential
-[credential]
-	helper = manager
-[credential "helperselector"]
-	selected = manager
-[credential "https://source.developers.google.com"]
-	useHttpPath = true
+[credential "https://github.com"]
+	helper = !'gh.exe' auth git-credential
+[credential "https://gist.github.com"]
+	helper = !'gh.exe' auth git-credential
+# [credential]
+# 	helper = manager
+# [credential "helperselector"]
+# 	selected = manager
 # diff
 [diff "sjis"]
 	textconv = "iconv -f sjis"
