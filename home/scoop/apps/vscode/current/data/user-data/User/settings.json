@@ -22,6 +22,7 @@
   "security.workspace.trust.untrustedFiles": "open",
   "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "terminal.integrated.scrollback": 2000,
+  "window.menuBarVisibility": "compact",
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.list.horizontalScrolling": true,
@@ -74,7 +75,6 @@
   "go.useLanguageServer": true,
   "terraform.codelens.referenceCount": true,
   "textlint.autoFixOnSave": true,
-  "window.menuBarVisibility": "compact",
   "hediet.vscode-drawio.resizeImages": null,
   "hediet.vscode-drawio.theme": "atlas",
   "github.copilot.editor.enableAutoCompletions": true
