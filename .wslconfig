@@ -1,5 +1,7 @@
 [wsl2]
+processors=8
 memory=8GB
 swap=0
-processors=2
 localhostForwarding=True
+nestedVirtualization=true
+guiApplications=true
