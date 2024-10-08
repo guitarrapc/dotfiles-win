@@ -85,22 +85,10 @@
                 "source": "VSDebugConsole"
             },
             {
-                "guid": "{e5a83caa-4c73-52b3-ae6b-bc438d721ef9}",
-                "hidden": false,
-                "name": "Ubuntu 22.04.3 LTS",
-                "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
-            },
-            {
                 "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
                 "hidden": false,
                 "name": "Git Bash",
                 "source": "Git"
-            },
-            {
-                "guid": "{acbafd15-cbbb-5bb3-8a61-bed446ff4b83}",
-                "hidden": false,
-                "name": "Ubuntu 24.04 LTS",
-                "source": "CanonicalGroupLimited.Ubuntu24.04LTS_79rhkp1fndgsc"
             },
             {
                 "guid": "{963ff2f7-6aed-5ce3-9d91-90d99571f53a}",
@@ -113,6 +101,18 @@
                 "hidden": true,
                 "name": "Ubuntu-22.04",
                 "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{4ff56d04-d9cf-57ea-bae2-ad396374e7e3}",
+                "hidden": false,
+                "name": "Ubuntu 22.04.5 LTS",
+                "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
+            },
+            {
+                "guid": "{d8e96812-b789-5068-a5ae-10b2fb53e95f}",
+                "hidden": false,
+                "name": "Ubuntu 24.04.1 LTS",
+                "source": "CanonicalGroupLimited.Ubuntu24.04LTS_79rhkp1fndgsc"
             }
         ]
     },
