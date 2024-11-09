@@ -5,3 +5,4 @@ swap=0
 localhostForwarding=True
 nestedVirtualization=true
 guiApplications=true
+networkingMode=mirrored
