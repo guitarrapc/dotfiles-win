@@ -5,6 +5,7 @@ swap=0
 localhostForwarding=True
 nestedVirtualization=true
 guiApplications=true
+autoMemoryReclaim=gradual
 networkingMode=mirrored
 dnsTunneling=true
 autoProxy=true
