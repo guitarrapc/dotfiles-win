@@ -6,3 +6,5 @@ localhostForwarding=True
 nestedVirtualization=true
 guiApplications=true
 networkingMode=mirrored
+dnsTunneling=true
+autoProxy=true
