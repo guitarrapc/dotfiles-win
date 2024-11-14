@@ -2,7 +2,7 @@
 processors=8
 memory=8GB
 swap=0
-localhostForwarding=True
+# localhostForwarding=True # can't use with `networkingMode=mirrored`
 nestedVirtualization=true
 guiApplications=true
 autoMemoryReclaim=gradual
