@@ -76,7 +76,7 @@
 	required = true
 [gpg]
 	program = gpg
-	format = openpgp
+	format = 
 [gui]
 	encoding = utf-8
 [include]
@@ -104,5 +104,5 @@
 [web]
 	browser = chromium
 [gpg "ssh"]
-	program = ssh-keygen
+	program = 
 	allowedSignersFile = 
