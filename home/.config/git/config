@@ -5,7 +5,6 @@
 
 # -- definitely make git better -- #
 [core]
-	excludesfile = ~/.gitignore_global
 	attributesfile = ~/.gitattributes
 	quotepath = false
 	symlinks = true
@@ -14,8 +13,6 @@
 	ignorecase = false
 	# windows only
 	autocrlf = true
-[include]
-	path = .gitconfig.local
 [column]
 	ui = auto
 [branch]

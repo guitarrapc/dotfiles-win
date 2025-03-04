@@ -1,4 +1,5 @@
 .DS_Store
 Thumbs.db
-.gitconfig.lock
 conf.private.d/
+.gitconfig.local
+home/.config/git/config.local
