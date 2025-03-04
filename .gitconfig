@@ -1,108 +1,87 @@
 [user]
 	name = Ikiru Yoshizaki
 	email = 3856350+guitarrapc@users.noreply.github.com
-	signingKey = 
+	signingKey =
+
+# -- definitely make git better -- #
 [core]
 	excludesfile = ~/.gitignore_global
 	attributesfile = ~/.gitattributes
-	quotepath = False
-	# windows only
-	autocrlf = true
+	quotepath = false
 	symlinks = true
 	filemode = false
 	longpaths = true
 	ignorecase = false
-
-# -- other settings -- #
-[alias]
-	# hub alias
-	pr = pull-requests
-	see = browse
-	# alias command
-	aliaslist = !"loop=; for k in `git config --get-regexp '^alias.' | sed -e 's/^alias.\\([^ ]*\\) .*$/\\1/g' | sort`; do printf ${k}; loop=${loop}1; if test ${#loop} -lt 5; then printf '\t'; else echo ''; loop=; fi; done"
-	aliasdoc = "!sh -c \"git config --get-regexp '^alias.' | grep '^alias.$1\\ ' | sed -e 's/^alias.$1/$1 =/g'\""
-	alias = "!sh -c \"if test -z $1; then git aliaslist; else git aliasdoc $1; fi\""
-	branchjunction = show-branch --merge-base
-	conflicts = diff --name-only --diff-filter=U
-	contains = branch -a --contains
-	diffbranch = show-branch --topo-order
-	rm-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
-	showfile = "!sh -c 'git show $0:$1'"
-# color
-[color]
-	ui = auto
-[color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
-[color "diff"]
-	meta = yellow bold
-	commit = green bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
-	newMoved = cyan
-	oldMoved = blue
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = "red bold 52"
-	newNormal = "green bold"
-	newHighlight = "green bold 22"
-[color "branch"]
-	current = green reverse
-	local = yellow
-	remote = green
+	# windows only
+	autocrlf = true
+[include]
+	path = .gitconfig.local
 [column]
 	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[init]
+	defaultBranch = main
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[diff "sjis"]
+	textconv = "iconv -f sjis"
+[push]
+	default = simple
+	followTags = true
+	autoSetupRemote = true
+	# enable git push --force-if-includes
+	useForceIfIncludes = true
+[fetch]
+	# Auto-kill defunct remote branches/tags
+	prune = true
+	pruneTags = true
+	all = true
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+
+# -- why not? -- #
+[help]
+	autocorrect = 1
+[gui]
+	encoding = utf-8
 [commit]
-	#  no template
-	# template = .stCommitMsg
 	gpgSign = false
+[rerere]
+	enabled = true
+	autoupdate = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	grep = auto
+	ui = auto
+[status]
+	color = auto
+
+# -- a matter of taste -- #
 [credential]
 	helper = manager
 [credential "helperselector"]
 	selected = manager
-# diff
-[diff "sjis"]
-	textconv = "iconv -f sjis"
-[fetch]
-	# Auto-kill defunct remote branches
-	prune = true
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge --skip -- %f
-	process = git-lfs filter-process --skip
-	required = true
-[gpg]
-	program = gpg
-	format = 
-[gui]
-	encoding = utf-8
-[include]
-	path = .gitconfig.local
-[init]
-	defaultBranch = main
-[help]
-	autocorrect = 1
-[lfs]
-	locksverify = false
 [pull]
-	rebase = false
-[push]
-	default = current
-	followTags = true
-	# enable git push --force-if-includes
-	useForceIfIncludes = true
+	rebase = true
 [submodule]
 	recurse = true
-[tag]
-	forceSignAnnotated = false
-# use https on ssh address.
-[url "https://github.com/"]
-	insteadOf = git@github.com:
-[web]
-	browser = chromium
-[gpg "ssh"]
-	program = 
-	allowedSignersFile = 
+[filter "lfs"]
+	process = git-lfs filter-process --skip
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge --skip -- %f
+[lfs]
+	locksverify = false
