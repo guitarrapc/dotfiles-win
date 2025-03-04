@@ -57,3 +57,4 @@ $RECYCLE.BIN/
 
 # Gibo
 .gitignore-boilerplates
+.gitconfig.local
