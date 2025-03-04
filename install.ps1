@@ -167,6 +167,11 @@ if ((GetOs) -ne "windows") {
     exit 1
 }
 
+# set XDG_CONFIG_HOME
+if ([string]::IsNullOrEmpty([Environment]::GetEnvironmentVariable("XDG_CONFIG_HOME"))) {
+    [Environment]::SetEnvironmentVariable("XDG_CONFIG_HOME", "${env:HOME}/.config", [EnvironmentVariableTarget]::User)
+}
+
 if (!(IsDeveloperMode -or IsEscalated)) {
     $myfunction = $MyInvocation.InvocationName
     $cd = (Get-Location).Path
