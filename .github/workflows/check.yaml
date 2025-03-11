@@ -28,7 +28,9 @@ jobs:
         run: |
           set -exo pipefail
           workspace="/$(printf '%s\n' "${{ github.workspace }}" | tr '\' '/' | tr -d ':' | tr "[:upper:]" "[:lower:]")"
-          ls -la "$HOME" | grep .gitconfig | grep "${workspace}/.gitconfig"
-          ls -la "$HOME" | grep .gitignore_global | grep "${workspace}/.gitignore_global"
+          ls -la "$HOME" | grep .wslconfig | grep "${workspace}/.wslconfig"
+          ls -la "$HOME" | grep .textlintrc.json | grep "${workspace}/.textlintrc.json"
+          ls -la "$HOME/.config/git" | grep config | grep "${workspace}/home/.config/git/config"
+          ls -la "$HOME/.config/git" | grep ignore | grep "${workspace}/home/.config/git/ignore"
           ls -la "$HOME/.docker" | grep daemon.json | grep "${workspace}/home/.docker/daemon.json"
           ls -la "$HOME/.ssh" | grep config | grep "${workspace}/home/.ssh/config"
