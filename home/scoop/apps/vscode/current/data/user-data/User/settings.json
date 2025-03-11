@@ -22,7 +22,6 @@
   "security.workspace.trust.untrustedFiles": "open",
   "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "terminal.integrated.scrollback": 2000,
-  "window.menuBarVisibility": "compact",
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.list.horizontalScrolling": true,
@@ -37,7 +36,6 @@
   },
   "[json]": {
     "editor.tabSize": 2,
-    "editor.defaultFormatter": "vscode.json-language-features",
   },
   "[jsonc]": {
     "editor.tabSize": 2
