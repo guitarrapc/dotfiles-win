@@ -5,7 +5,8 @@ swap=0
 # localhostForwarding=True # can't use with `networkingMode=mirrored`
 nestedVirtualization=true
 guiApplications=true
-autoMemoryReclaim=gradual
 networkingMode=mirrored
 dnsTunneling=true
 autoProxy=true
+[experimental]
+autoMemoryReclaim=gradual
