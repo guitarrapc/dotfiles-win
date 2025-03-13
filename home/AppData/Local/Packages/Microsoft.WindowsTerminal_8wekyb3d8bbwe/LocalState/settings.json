@@ -95,6 +95,18 @@
                 "hidden": false,
                 "name": "PowerShell (scoop)",
                 "source": "Windows.Terminal.PowershellCore"
+            },
+            {
+                "guid": "{917cbcbd-153e-5eba-99e6-5b9421e14f81}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "Microsoft.WSL"
+            },
+            {
+                "guid": "{a5ae410e-67ec-5af9-b375-e4dd8dff83ad}",
+                "hidden": false,
+                "name": "Ubuntu-24.04",
+                "source": "Microsoft.WSL"
             }
         ]
     },
