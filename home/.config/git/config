@@ -19,6 +19,7 @@
 	sort = -committerdate
 [tag]
 	sort = version:refname
+	forceSignAnnotated = false
 [init]
 	defaultBranch = main
 [diff]
@@ -76,9 +77,15 @@
 [submodule]
 	recurse = true
 [filter "lfs"]
-	process = git-lfs filter-process --skip
+	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge --skip -- %f
+	smudge = git-lfs smudge -- %f
 [lfs]
 	locksverify = false
+[gpg]
+	format =
+	program = gpg
+[gpg "ssh"]
+	program =
+	allowedSignersFile =
