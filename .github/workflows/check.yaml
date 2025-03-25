@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           set -exo pipefail
-          workspace=$(echo "${{ github.workspace }}" | tr "\\" "/" | tr -d ":" | tr '[:upper:]' '[:lower:]')
+          workspace=$(echo "/${{ github.workspace }}" | tr "\\" "/" | tr -d ":" | tr '[:upper:]' '[:lower:]')
           [ -f "$HOME/.wslconfig" ] && [ "$(readlink -f "$HOME/.wslconfig")" = "${workspace}/.wslconfig" ]
           [ -f "$HOME/.textlintrc.json" ] && [ "$(readlink -f "$HOME/.textlintrc.json")" = "${workspace}/.textlintrc.json" ]
           [ -f "$HOME/.config/git/config" ] && [ "$(readlink -f "$HOME/.config/git/config")" = "${workspace}/home/.config/git/config" ]
