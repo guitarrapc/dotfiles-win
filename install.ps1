@@ -98,7 +98,7 @@ function main() {
     $current = $(Get-Location).Path
 
     # dotfiles
-    Get-ChildItem -File -Filter ".*" -Force | Where-Object Name -notin @(".gitignore", ".gitattributes", ".editorconfig") |
+    Get-ChildItem -File -Filter ".*" -Force | Where-Object Name -notin @(".gitignore", ".gitattributes", ".editorconfig", "aqua.yaml") |
     ForEach-Object {
         $sourceFile = $_.FullName
         $targetFile = "$env:UserProfile\$($_.name)"
