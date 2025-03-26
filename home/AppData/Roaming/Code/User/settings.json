@@ -18,11 +18,6 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "git.enableSmartCommit": true,
-  "go.toolsEnvVars": {
-    "GO111MODULE": "on"
-  },
-  "go.formatTool": "goimports",
-  "go.useLanguageServer": true,
   "redhat.telemetry.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
   "terminal.integrated.defaultProfile.windows": "Command Prompt",
@@ -65,12 +60,27 @@
     "editor.tabSize": 2
   },
   // see: https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform#configuration
-  "terraform.codelens.referenceCount": true,
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
     "markdown": true,
     "scminput": false
   },
+  "go.formatTool": "goimports",
   "go.toolsManagement.autoUpdate": true,
+  "go.toolsEnvVars": {
+    "GO111MODULE": "on"
+  },
+  "go.useLanguageServer": true,
+  "terraform.codelens.referenceCount": true,
+  "textlint.autoFixOnSave": true,
+  "hediet.vscode-drawio.resizeImages": null,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "settingsSync.ignoredExtensions": [
+    "bmewburn.vscode-intelephense-client",
+    "ms-python.vscode-pylance",
+    "ms-python.python",
+    "ms-python.debugpy",
+    "saoudrizwan.claude-dev"
+  ]
 }
