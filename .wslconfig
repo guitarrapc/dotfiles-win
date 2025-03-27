@@ -9,4 +9,6 @@ networkingMode=mirrored
 dnsTunneling=true
 autoProxy=true
 [experimental]
-autoMemoryReclaim=gradual
+# Docker Desktop Resource Saver and `gradual` cause WSL2 freeze: https://github.com/microsoft/WSL/issues/10901
+# autoMemoryReclaim=gradual
+autoMemoryReclaim=dropcache
