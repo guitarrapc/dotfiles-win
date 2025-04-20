@@ -33,9 +33,12 @@ jobs:
         run: |
           set -exo pipefail
           workspace=$(echo "/${{ github.workspace }}" | tr "\\" "/" | tr -d ":" | tr '[:upper:]' '[:lower:]')
-          [ -f "$HOME/.wslconfig" ] && [ "$(readlink -f "$HOME/.wslconfig")" = "${workspace}/.wslconfig" ]
           [ -f "$HOME/.textlintrc.json" ] && [ "$(readlink -f "$HOME/.textlintrc.json")" = "${workspace}/.textlintrc.json" ]
-          [ -f "$HOME/.config/git/config" ] && [ "$(readlink -f "$HOME/.config/git/config")" = "${workspace}/home/.config/git/config" ]
-          [ -f "$HOME/.config/git/ignore" ] && [ "$(readlink -f "$HOME/.config/git/ignore")" = "${workspace}/home/.config/git/ignore" ]
-          [ -f "$HOME/.docker/daemon.json" ] && [ "$(readlink -f "$HOME/.docker/daemon.json")" = "${workspace}/home/.docker/daemon.json" ]
-          [ -f "$HOME/.ssh/config" ] && [ "$(readlink -f "$HOME/.ssh/config")" = "${workspace}/home/.ssh/config" ]
+          [ -f "$HOME/.wslconfig" ] && [ "$(readlink -f "$HOME/.wslconfig")" = "${workspace}/.wslconfig" ]
+          [ -f "$HOME/.config/git/config" ] && [ "$(readlink -f "$HOME/.config/git/config")" = "${workspace}/HOME/.config/git/config" ]
+          [ -f "$HOME/.config/git/ignore" ] && [ "$(readlink -f "$HOME/.config/git/ignore")" = "${workspace}/HOME/.config/git/ignore" ]
+          [ -f "$HOME/.ssh/config" ] && [ "$(readlink -f "$HOME/.ssh/config")" = "${workspace}/HOME/.ssh/config" ]
+          [ -f "$HOME/.ssh/config.d/aws.conf" ] && [ "$(readlink -f "$HOME/.ssh/config.d/aws.conf")" = "${workspace}/HOME/.ssh/config.d/aws.conf" ]
+          [ -f "$HOME/.ssh/config.d/github.conf" ] && [ "$(readlink -f "$HOME/.ssh/config.d/github.conf")" = "${workspace}/HOME/.ssh/config.d/github.conf" ]
+          [ -f "$HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json" ] && [ "$(readlink -f "$HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json")" = "${workspace}/HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json" ]
+          [ -f "$HOME/AppData/Roaming/Code/User/settings.json" ] && [ "$(readlink -f "$HOME/AppData/Roaming/Code/User/settings.json")" = "${workspace}/HOME/AppData/Roaming/Code/User/settings.json" ]

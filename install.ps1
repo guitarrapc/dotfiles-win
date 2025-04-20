@@ -98,7 +98,7 @@ function main() {
     $current = $(Get-Location).Path
 
     # dotfiles
-    $files = Get-ChildItem -File -Filter ".*" -Force | Where-Object Name -notin $(Get-Content .dotfiles_ignore)
+    $files = Get-ChildItem -File -Filter ".*" -Force | Where-Object Name -notin $(Get-Content "dotfiles_ignore")
     foreach ($file in $files) {
         $sourceFile = $file.FullName
         $targetFile = "$env:UserProfile\$($file.name)"
