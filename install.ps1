@@ -98,10 +98,10 @@ function main() {
     $current = $(Get-Location).Path
 
     # dotfiles
-    Get-ChildItem -File -Filter ".*" -Force | Where-Object Name -notin @(".gitignore", ".gitattributes", ".editorconfig", "aqua.yaml") |
-    ForEach-Object {
-        $sourceFile = $_.FullName
-        $targetFile = "$env:UserProfile\$($_.name)"
+    $files = Get-ChildItem -File -Filter ".*" -Force | Where-Object Name -notin $(Get-Content .dotfiles_ignore)
+    foreach ($file in $files) {
+        $sourceFile = $file.FullName
+        $targetFile = "$env:UserProfile\$($file.name)"
         if (Test-Path "$targetFile") {
             if ((ReadLink -path $targetFile) -ne "$sourceFile") {
                 $answer = AskConfirmation -message "'$targetFile' already exists, do you want to overwrite it?"
@@ -123,13 +123,13 @@ function main() {
     }
 
     # home
-    Get-ChildItem -LiteralPath home -Directory -Force |
-    ForEach-Object {
-        $dir_root = $_.FullName
+    $files = Get-ChildItem -LiteralPath home -Directory -Force
+    foreach ($file in $files) {
+        $dir_root = $file.FullName
 
-        Get-ChildItem -LiteralPath "$dir_root" -File -Force -Recurse |
-        ForEach-Object {
-            $sourceFile = $_.FullName
+        $dirFiles = Get-ChildItem -LiteralPath "$dir_root" -File -Force -Recurse
+        foreach ($dirFile in $dirFiles) {
+            $sourceFile = $dirFile.FullName
             $targetFile = $sourceFile.Replace("/home", "").Replace("\home", "").Replace($current, $env:UserProfile)
             $parentDir = [System.IO.Path]::GetDirectoryName("$targetFile");
 
