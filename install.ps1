@@ -123,14 +123,14 @@ function main() {
     }
 
     # home
-    $files = Get-ChildItem -LiteralPath home -Directory -Force
+    $files = Get-ChildItem -LiteralPath HOME -Directory -Force
     foreach ($file in $files) {
         $dir_root = $file.FullName
 
         $dirFiles = Get-ChildItem -LiteralPath "$dir_root" -File -Force -Recurse
         foreach ($dirFile in $dirFiles) {
             $sourceFile = $dirFile.FullName
-            $targetFile = $sourceFile.Replace("/home", "").Replace("\home", "").Replace($current, $env:UserProfile)
+            $targetFile = $sourceFile.Replace("/HOME", "").Replace("\HOME", "").Replace($current, $env:UserProfile)
             $parentDir = [System.IO.Path]::GetDirectoryName("$targetFile");
 
             # create folder tree
