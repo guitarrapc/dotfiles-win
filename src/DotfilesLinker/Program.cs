@@ -1,9 +1,13 @@
 // DotfilesLinker – top‑level statements / Native AOT
 // build: dotnet publish -c Release -r win-x64 /p:PublishAot=true /p:PublishSingleFile=true
 
+using System.Runtime.Versioning;
 using System.Diagnostics;
 using System.Security.Principal;
 using Microsoft.Win32;
+
+// This code is only for Windows.
+[assembly: SupportedOSPlatform("windows")]
 
 // コマンドライン解析
 string? force = args.FirstOrDefault(a => a.StartsWith("--force=", StringComparison.OrdinalIgnoreCase))?.Split('=', 2)[1];
