@@ -18,7 +18,7 @@ end_of_line = lf
 [.profile]
 end_of_line = lf
 
-[.gitconfig]
+[home/.config/git/*]
 end_of_line = lf
 indent_style = tab
 insert_final_newline = true
