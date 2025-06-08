@@ -40,5 +40,4 @@ jobs:
           [ -f "$HOME/.ssh/config" ] && [ "$(readlink -f "$HOME/.ssh/config")" = "${workspace}/HOME/.ssh/config" ]
           [ -f "$HOME/.ssh/config.d/aws.conf" ] && [ "$(readlink -f "$HOME/.ssh/config.d/aws.conf")" = "${workspace}/HOME/.ssh/config.d/aws.conf" ]
           [ -f "$HOME/.ssh/config.d/github.conf" ] && [ "$(readlink -f "$HOME/.ssh/config.d/github.conf")" = "${workspace}/HOME/.ssh/config.d/github.conf" ]
-          [ -f "$HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json" ] && [ "$(readlink -f "$HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json")" = "${workspace}/HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json" ]
           [ -f "$HOME/AppData/Roaming/Code/User/settings.json" ] && [ "$(readlink -f "$HOME/AppData/Roaming/Code/User/settings.json")" = "${workspace}/HOME/AppData/Roaming/Code/User/settings.json" ]
