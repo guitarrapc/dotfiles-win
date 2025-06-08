@@ -89,5 +89,6 @@
   "accessibility.signals.chatResponseReceived": {
     "sound": "on"
   },
-  "chat.editing.autoAcceptDelay": 5
+  "chat.editing.autoAcceptDelay": 5,
+  "workbench.startupEditor": "none"
 }
