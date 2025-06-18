@@ -26,23 +26,45 @@
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.list.horizontalScrolling": true,
   "workbench.list.smoothScrolling": true,
+  "workbench.startupEditor": "none",
   "workbench.tree.indent": 12,
   "workbench.tree.renderIndentGuides": "always",
+  "settingsSync.ignoredExtensions": [
+    "bmewburn.vscode-intelephense-client",
+    "ms-python.vscode-pylance",
+    "ms-python.python",
+    "ms-python.debugpy",
+    "saoudrizwan.claude-dev"
+  ],
+  // docker
   "[dockercompose]": {
     // wait for vscode-docker 1.19 https://github.com/microsoft/vscode-docker/pull/3357
     // due to compose-laguage-service internal settings. https://github.com/microsoft/compose-language-service/issues/70
     "editor.formatOnSave": false,
     "editor.tabSize": 4
   },
+  "docker.extension.enableComposeLanguageServer": true,
+  // draw.io
+  "hediet.vscode-drawio.resizeImages": null,
+  // go
+  "go.formatTool": "goimports",
+  "go.toolsManagement.autoUpdate": true,
+  "go.toolsEnvVars": {
+    "GO111MODULE": "on"
+  },
+  "go.useLanguageServer": true,
+  // json
   "[json]": {
     "editor.tabSize": 2,
   },
   "[jsonc]": {
     "editor.tabSize": 2
   },
+  // python
   "[python]": {
     "editor.formatOnType": true
   },
+  // terraform
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform",
     "editor.formatOnSave": true,
@@ -53,42 +75,28 @@
     "editor.formatOnSave": true,
     "editor.formatOnSaveMode": "file"
   },
+  "terraform.codelens.referenceCount": true,
+  // textlint
+  "textlint.autoFixOnSave": true,
+  // yaml
   "[yaml]": {
     "editor.tabSize": 2
   },
   "[yml]": {
     "editor.tabSize": 2
   },
-  // see: https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform#configuration
+  // github copilot. see https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform#configuration
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
     "markdown": true,
     "scminput": false
   },
-  "go.formatTool": "goimports",
-  "go.toolsManagement.autoUpdate": true,
-  "go.toolsEnvVars": {
-    "GO111MODULE": "on"
-  },
-  "go.useLanguageServer": true,
-  "terraform.codelens.referenceCount": true,
-  "textlint.autoFixOnSave": true,
-  "hediet.vscode-drawio.resizeImages": null,
-  "github.copilot.editor.enableAutoCompletions": true,
-  "settingsSync.ignoredExtensions": [
-    "bmewburn.vscode-intelephense-client",
-    "ms-python.vscode-pylance",
-    "ms-python.python",
-    "ms-python.debugpy",
-    "saoudrizwan.claude-dev"
-  ],
+  "github.copilot.chat.agent.thinkingTool": true,
   "chat.tools.autoApprove": true,
   "chat.agent.maxRequests": 999,
-  "github.copilot.chat.agent.thinkingTool": true,
   "accessibility.signals.chatResponseReceived": {
     "sound": "on"
   },
   "chat.editing.autoAcceptDelay": 5,
-  "workbench.startupEditor": "none"
 }
