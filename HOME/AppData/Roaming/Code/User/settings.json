@@ -38,16 +38,10 @@
   ],
   // docker
   "[dockercompose]": {
-    "editor.insertSpaces": true,
-    "editor.tabSize": 4,
-    "editor.autoIndent": "advanced",
-    "editor.quickSuggestions": {
-      "other": true,
-      "comments": false,
-      "strings": true
-    },
+    // wait for vscode-docker 1.19 https://github.com/microsoft/vscode-docker/pull/3357
+    // due to compose-laguage-service internal settings. https://github.com/microsoft/compose-language-service/issues/70
     "editor.formatOnSave": false,
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.tabSize": 4
   },
   "docker.extension.enableComposeLanguageServer": true,
   // draw.io
