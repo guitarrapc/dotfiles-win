@@ -168,8 +168,8 @@ if ((GetOs) -ne "windows") {
 }
 
 # set XDG_CONFIG_HOME
-if ([string]::IsNullOrEmpty([Environment]::GetEnvironmentVariable("XDG_CONFIG_HOME"))) {
-    [Environment]::SetEnvironmentVariable("XDG_CONFIG_HOME", "${env:HOME}/.config", [EnvironmentVariableTarget]::User)
+if ([string]::IsNullOrEmpty([Environment]::GetEnvironmentVariable("XDG_CONFIG_HOME", [EnvironmentVariableTarget]::User))) {
+    [Environment]::SetEnvironmentVariable("XDG_CONFIG_HOME", "${HOME}/.config", [EnvironmentVariableTarget]::User)
 }
 
 if (!(IsDeveloperMode -or IsEscalated)) {
