@@ -83,7 +83,6 @@
 [lfs]
 	locksverify = false
 [gpg]
-	format =
 	program = gpg
 [gpg "ssh"]
 	program =
