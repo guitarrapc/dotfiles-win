@@ -92,12 +92,13 @@
     "markdown": true,
     "scminput": false
   },
-  "github.copilot.chat.agent.thinkingTool": true,
-  "chat.tools.autoApprove": true,
-  "chat.agent.maxRequests": 999,
+  "github.copilot.nextEditSuggestions.enabled": true,
   "accessibility.signals.chatResponseReceived": {
     "sound": "on"
   },
+  "chat.agent.maxRequests": 999,
   "chat.editing.autoAcceptDelay": 5,
-  "github.copilot.nextEditSuggestions.enabled": true,
+  "chat.useAgentSkills": true,
+  "chat.useNestedAgentsMdFiles": true,
+  "chat.viewSessions.orientation": "stacked",
 }
