@@ -101,4 +101,16 @@
   "chat.useAgentSkills": true,
   "chat.useNestedAgentsMdFiles": true,
   "chat.viewSessions.orientation": "stacked",
+  "chat.tools.urls.autoApprove": {
+    "https://code.visualstudio.com": true,
+    "https://github.com/microsoft/vscode/wiki/*": true,
+    "https://docs.github.com": {
+      "approveRequest": false,
+      "approveResponse": true
+    },
+    "https://raw.githubusercontent.com": {
+      "approveRequest": false,
+      "approveResponse": true
+    }
+  }
 }
