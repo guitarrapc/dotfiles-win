@@ -112,5 +112,10 @@
       "approveRequest": false,
       "approveResponse": true
     }
+  },
+  "chat.tools.terminal.autoApprove": {
+    "dotnet run": true,
+    "dotnet build": true,
+    "dotnet test": true
   }
 }
