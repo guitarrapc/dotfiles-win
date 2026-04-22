@@ -69,12 +69,23 @@ Your task is to ensure .NET/C# code in ${selection} meets the best practices spe
 - Throw specific exceptions with descriptive messages
 - Use try-catch blocks for expected failure scenarios
 
-## Performance & Security
+## Performance & Memory Efficiency
 
 - .NET 10 optimizations where applicable
 - Implement proper input validation and sanitization
 - Use parameterized queries for database operations
 - Follow secure coding practices for AI/ML operations
+
+### Allocation-Aware Design
+
+- Prefer `ReadOnlyMemory<byte>` / `ReadOnlyMemory<char>` over `byte[]` / `string` when data is a slice of a longer-lived buffer — this avoids copying
+- Use `ReadOnlySpan<T>` for transient comparisons and parsing; promote to `ReadOnlyMemory<T>` only when you need to store the reference beyond stack lifetime
+- When a struct wraps owned bytes (e.g. a UTF-8 string key), use `ReadOnlyMemory<byte>` as the backing field instead of `byte[]` — this enables both copying construction (from `Span`) and zero-copy construction (from `Memory` slice of existing array)
+- For per-item work in a loop (per-job, per-request, per-row), ask: "Is this allocation invariant across iterations?" If yes, hoist to a shared cache or `static readonly` field
+- For small temporary buffers (≤ 128 elements), prefer `stackalloc`; for larger ones, use `ArrayPool<T>.Shared`
+- Avoid `new T[]`, `new List<T>()`, `new Dictionary<K,V>()` inside hot loops — pre-allocate and `.Clear()` or use fixed-size field arrays with element overwrite
+- Cache computed results that depend only on immutable input (e.g. line offsets from source text, parsed expressions by content hash)
+- When the same string is constructed repeatedly with identical content (e.g. diagnostic messages for the same entity), cache the last result and compare input bytes before regenerating
 
 ## Code Quality
 
