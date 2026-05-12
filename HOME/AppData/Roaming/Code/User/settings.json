@@ -111,6 +111,10 @@
     "https://raw.githubusercontent.com": {
       "approveRequest": false,
       "approveResponse": true
+    },
+    "https://github.com/actions/attest-build-provenance/releases": {
+      "approveRequest": false,
+      "approveResponse": true
     }
   }
 }
