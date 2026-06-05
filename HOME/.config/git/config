@@ -1,7 +1,7 @@
 [user]
 	name = Ikiru Yoshizaki
 	email = 3856350+guitarrapc@users.noreply.github.com
-	signingKey =
+	signingKey = F93DD3822D017453
 
 # -- definitely make git better -- #
 [core]
