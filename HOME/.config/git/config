@@ -18,7 +18,7 @@
 	sort = -committerdate
 [tag]
 	sort = version:refname
-	forceSignAnnotated = true
+	forceSignAnnotated = false
 [init]
 	defaultBranch = main
 [diff]
@@ -48,7 +48,7 @@
 [gui]
 	encoding = utf-8
 [commit]
-	gpgSign = true
+	gpgSign = false
 [rerere]
 	enabled = true
 	autoupdate = true
