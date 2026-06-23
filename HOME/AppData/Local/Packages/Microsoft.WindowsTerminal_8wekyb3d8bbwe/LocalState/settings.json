@@ -14,16 +14,16 @@
       "id": "User.paste"
     },
     {
+      "command": "find",
+      "id": "User.find"
+    },
+    {
       "command": {
         "action": "splitPane",
         "split": "auto",
         "splitMode": "duplicate"
       },
       "id": "User.splitPane.A6751878"
-    },
-    {
-      "command": "find",
-      "id": "User.find"
     }
   ],
   "copyFormatting": "none",
@@ -35,16 +35,20 @@
       "keys": "ctrl+c"
     },
     {
-      "id": "User.find",
-      "keys": "ctrl+shift+f"
-    },
-    {
       "id": "User.paste",
       "keys": "ctrl+v"
     },
     {
+      "id": "User.find",
+      "keys": "ctrl+shift+f"
+    },
+    {
       "id": "User.splitPane.A6751878",
       "keys": "alt+shift+d"
+    },
+    {
+      "id": "Terminal.ToggleShaderEffects",
+      "keys": "shift+f10"
     }
   ],
   "newTabMenu": [
@@ -54,7 +58,8 @@
   ],
   "profiles": {
     "defaults": {
-      "startingDirectory": null
+      "startingDirectory": null,
+      "experimental.pixelShaderPath": "D:\\github\\guitarrapc\\matrix\\shaders\\windows-terminal\\matrix-bloom.hlsl"
     },
     "list": [
       {
@@ -106,11 +111,11 @@
         "source": "Windows.Terminal.VisualStudio"
       },
       {
-        "guid": "{7d08f151-9258-41df-b259-0619b2bca2cb}",
-        "hidden": false,
         "colorScheme": "Ubuntu",
         "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d ubuntu-24.04 --cd ~",
         "cursorShape": "filledBox",
+        "guid": "{7d08f151-9258-41df-b259-0619b2bca2cb}",
+        "hidden": false,
         "name": "Ubuntu-24.04",
         "pathTranslationStyle": "wsl",
         "suppressApplicationTitle": true
