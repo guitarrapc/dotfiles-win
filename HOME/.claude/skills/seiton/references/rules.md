@@ -56,6 +56,7 @@ rules:
 | run-inputs-context-direct-use | error | yes | both | on |
 | secrets-whole-context-access | error | no | both | on |
 | checkout-persist-credentials | warning | yes | both | on |
+| checkout-unsafe-pr | warning | yes | both | on |
 | deny-read-all | error | yes | both | on |
 | deny-inherit-secrets | error | no | both | on |
 | job-timeout-minutes-required | error | yes | both | on |
@@ -88,6 +89,7 @@ rules:
 | unsound-contains | mixed | no | workflow | on |
 | bot-conditions | mixed | no | workflow | on |
 | artipacked | mixed | no | workflow | on |
+| background-steps | mixed | no | workflow | on |
 | known-vulnerable-actions | error | no | workflow | opt-in |
 | impostor-commit | error | no | workflow | opt-in |
 | ref-confusion | error | no | workflow | opt-in |
@@ -123,7 +125,7 @@ Online rules (`known-vulnerable-actions`, `impostor-commit`, `ref-confusion`, `s
 
 ### Security
 
-`template-injection`, `credentials`, `secrets-whole-context-access`, `run-secrets-context-direct-use`, `run-env-context-direct-use`, `run-inputs-context-direct-use`, `unredacted-secrets`, `secrets-outside-env`, `insecure-commands`, `cache-poisoning-trigger`, `self-hosted-runner-trigger`, `dangerous-triggers`, `known-vulnerable-actions`, `impostor-commit`, `ref-confusion`
+`template-injection`, `credentials`, `secrets-whole-context-access`, `run-secrets-context-direct-use`, `run-env-context-direct-use`, `run-inputs-context-direct-use`, `unredacted-secrets`, `secrets-outside-env`, `insecure-commands`, `cache-poisoning-trigger`, `self-hosted-runner-trigger`, `dangerous-triggers`, `checkout-unsafe-pr`, `known-vulnerable-actions`, `impostor-commit`, `ref-confusion`
 
 ### Pinning & Supply Chain
 
@@ -135,7 +137,7 @@ Online rules (`known-vulnerable-actions`, `impostor-commit`, `ref-confusion`, `s
 
 ### Correctness
 
-`job-structure`, `reusable-workflow`, `needs-graph`, `dispatch-inputs`, `schedule-event`, `glob-pattern`, `expr-undefined-var`, `popular-action-inputs`, `local-action-inputs`, `github-app-token-inputs`, `workflow-call-input-default`, `matrix`, `if-cond`, `unsound-condition`, `unsound-contains`, `bot-conditions`
+`job-structure`, `reusable-workflow`, `needs-graph`, `dispatch-inputs`, `schedule-event`, `glob-pattern`, `expr-undefined-var`, `popular-action-inputs`, `local-action-inputs`, `github-app-token-inputs`, `workflow-call-input-default`, `matrix`, `if-cond`, `unsound-condition`, `unsound-contains`, `bot-conditions`, `background-steps`
 
 ### Style & Best Practice
 

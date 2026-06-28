@@ -68,6 +68,7 @@ The following rules support `--fix`:
 - `run-inputs-context-direct-use` — moves `inputs.*` to step env
 - `runner-no-latest` — replaces `-latest` with pinned version
 - `checkout-persist-credentials` — adds `persist-credentials: false`
+- `checkout-unsafe-pr` — replaces `allow-unsafe-pr-checkout: true` with `false`
 - `job-timeout-minutes-required` — adds `timeout-minutes`
 - `if-expr-wrapper` — removes redundant `${{ }}` wrapper in `if:`
 - `unsound-condition` — fixes always-true/false conditions
@@ -139,11 +140,13 @@ fix:
     enable-network: false          # Default; use --enable-image-network to override
     exclude-images:                # Skip pinning these images
       - scratch
-    exclude-tags:                  # Skip images with these tags
-      - latest
+    exclude-tags:                  # Skip images with these tags (default: latest)
+      - latest                    # Tagless refs (e.g. image: redis) count as latest
     ignore-images:                 # Skip glob-matched images
       - "mcr.microsoft.com/**"
 ```
+
+When `--enable-image-network` is on but an image is still not pinned, check the diagnostic `help:` line. Skips due to `exclude-tags` / `exclude-images` are explained there.
 
 ## Workflow Example
 
