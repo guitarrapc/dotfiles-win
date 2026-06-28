@@ -59,7 +59,7 @@
   "profiles": {
     "defaults": {
       "startingDirectory": null,
-      "experimental.pixelShaderPath": "D:\\github\\guitarrapc\\matrix\\shaders\\windows-terminal\\matrix-bloom.hlsl"
+      "experimental.pixelShaderPath": "D:\\github\\guitarrapc\\matrix\\shaders\\windows-terminal\\foobar.hlsl"
     },
     "list": [
       {
