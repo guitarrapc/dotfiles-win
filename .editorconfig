@@ -9,6 +9,9 @@ trim_trailing_whitespace = true
 [home/.docker/daemon.json]
 indent_size = 2
 
+[*.yaml]
+indent_size = 2
+
 [.gitattributes]
 end_of_line = lf
 

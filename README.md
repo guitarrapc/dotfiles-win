@@ -1,6 +1,6 @@
-dotfiles-win
+# dotfiles-win
 
-## Preprequisites
+## Prerequisites
 
 * Enable Windows Developer Mode to allow Symlink without UAC Admin Escalation, also allow PowerShell Script execution.
 
