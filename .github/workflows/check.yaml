@@ -40,3 +40,13 @@ jobs:
           [ -f "$HOME/.ssh/config.d/aws.conf" ] && [ "$(readlink -f "$HOME/.ssh/config.d/aws.conf")" = "${workspace}/HOME/.ssh/config.d/aws.conf" ]
           [ -f "$HOME/.ssh/config.d/github.conf" ] && [ "$(readlink -f "$HOME/.ssh/config.d/github.conf")" = "${workspace}/HOME/.ssh/config.d/github.conf" ]
           [ -f "$HOME/AppData/Roaming/Code/User/settings.json" ] && [ "$(readlink -f "$HOME/AppData/Roaming/Code/User/settings.json")" = "${workspace}/HOME/AppData/Roaming/Code/User/settings.json" ]
+
+  check-complete:
+    needs: [install]
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - name: Check complete
+        run: echo "Check complete."
