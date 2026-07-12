@@ -86,7 +86,8 @@ diff-friendly and keeps the loop independent of library internals/visibility.
                      form the next hypothesis from the asm evidence
     7. stop          when the round's best improvement is < 2-3% per scenario,
                      or remaining hypotheses have negative expected value
-                     (e.g., tables that would blow L1) — say so explicitly
+                     (e.g., tables that would blow L1) — but ONLY after the
+                     convergence audit (below) finds nothing. Say so explicitly.
     8. ship          port the winner; see "Shipping" below
 ```
 
@@ -103,6 +104,16 @@ from re-testing dead ends, and refutations are often the most valuable findings.
   called out as a documented trade-off.
 - Winners must win **per scenario**. A variant that wins large inputs but loses
   small ones (per-call setup cost) needs a size cutoff or per-size dispatch.
+- **A cliff between adjacent-size scenarios is a finding, not a fact of life.**
+  If size N and size N+1 differ by ≥3× every round, that is a dispatch boundary
+  in the code, and the boundary is guilty until proven algorithmically
+  necessary — send it to the convergence audit instead of reading it as "the
+  slow fallback being slow, as expected".
+- **Use noise canaries.** A variant whose code is byte-identical to the baseline
+  on some scenario measures that scenario's true noise floor — and at ≤100 ns
+  per op, cross-process code layout can swing identical code ±15-20%, far above
+  the 2-3% rule of thumb. Never accept/refute from a delta the canary spread
+  can explain; rerun before believing any small-scenario verdict.
 
 ### Disassembly checklist
 
@@ -131,14 +142,25 @@ it, and later rungs only pay once the earlier waste is gone:
 1. **Remove per-call algorithmic waste.** Anything that depends only on a small
    set of parameters (generator polynomials, shift tables, format constants) can
    be computed once and cached per parameter value. This is routinely worth more
-   than all instruction-level tricks combined.
+   than all instruction-level tricks combined. "Per call" means per *workload*,
+   not per invocation of the current signature: if the caller invokes the kernel
+   N times with one argument held fixed (a query matched against N candidates, a
+   key probed into N buckets), everything derived from that argument is being
+   paid N times — and hoisting it usually requires **adding a batch-shaped API**.
+   That is a legitimate variant, not a harness change.
 2. **Restructure lookups.** Move work into precomputed tables; convert
    multi-step math into single lookups (log-domain, direct multiplication rows).
 3. **Bounds-check / ref tricks, unrolling.** Worth ~10-20% each, only after 1-2.
 4. **SIMD the data plane.** Vectorize the bulk operation. Know the domain
    idioms (e.g., byte-table lookups via nibble-split shuffles rather than
    gathers). Try multiple widths — wider is NOT automatically faster; measure
-   128-bit×2 vs 256-bit.
+   128-bit×2 vs 256-bit. If the inner recurrence is serial ("can't vectorize
+   this"), that verdict only covers ONE instance: when the workload has many
+   independent instances (rung 1's batch shape exposes them), vectorize
+   **across instances** — one lane per instance, shared read-only tables,
+   per-lane state, each lane's result captured at its own end. Even a scalar
+   per-lane gather for the table reads can leave a 1.5-2× win on the vector ALU
+   work.
 5. **Registerize state.** Keep small hot state (≤ a vector or two) in registers
    across the whole loop instead of round-tripping memory; store-to-load
    forwarding on the dependency chain is expensive.
@@ -156,6 +178,42 @@ it, and later rungs only pay once the earlier waste is gone:
    and guard branches are first-class targets: fuse tables behind one pointer;
    in the real port, hold per-parameter state in an encoder object across calls.
 
+### The convergence audit (run before declaring done)
+
+"Improvement < 2-3%" only proves convergence **within the search space you
+chose** — usually the incumbent function's signature and its guards. Whole
+multiples routinely hide one level up. A loop that converged at the per-call
+level was later reopened at the caller level and found 2.5× (batch API) and 14×
+(wrong guard) sitting in scenarios that had been in the table since round 1.
+Before declaring convergence, run these three mechanical checks and record the
+answers in the findings log:
+
+1. **Loop-invariant argument audit.** For every scenario whose harness invokes
+   the kernel N>1 times: write down each argument that is identical across the
+   N calls. For each, list what the kernel computes from it alone (validation
+   scans, lookup tables, normalized copies). If that list is non-empty, the
+   work is being paid N times — add a batch-shaped variant that takes the
+   collection and hoists it. The current signature is an artifact of the
+   incumbent, not a rule of the game; the scenario loop is part of the
+   optimizable surface.
+2. **Cliff audit.** For every pair of adjacent-size scenarios with a ratio ≥3×:
+   name the guard in the code that separates them, then re-derive that guard's
+   condition from the algorithm itself (original paper / known formulation),
+   not from the incumbent implementation. Ask specifically: (a) which operand
+   does the limit actually constrain? (a two-operand guard is often really a
+   one-operand precondition — e.g. bit-parallel edit distance bounds only the
+   pattern side, not both strings); (b) does a multi-word / blocked / tiled
+   extension of the fast path exist that moves the boundary outward? Inherited
+   guards are hypotheses, not laws.
+3. **Serial-recurrence SIMD re-check.** If SIMD was rejected because "the
+   recurrence is serial", re-open it: that rules out vectorizing within one
+   instance only. If check 1 surfaced ≥2 independent instances per call site,
+   try lane-per-instance batching (ladder rung 4). Note the dependency: this
+   move is invisible until the batch API from check 1 exists — misses compound.
+
+If any check produces a variant, the loop is not converged; go back to step 1
+with it.
+
 ### Principles that keep proving true
 
 - Caching pays only when it removes work from the *serial chain*; caching what
@@ -168,7 +226,15 @@ it, and later rungs only pay once the earlier waste is gone:
   a per-parameter blob can make things slower.
 - Correctness gates let you be aggressive. Every exotic transform (linearized
   recurrences, bit-matrix conventions) was safe to try because a mismatch threw
-  before any measurement.
+  before any measurement. They also catch **design** bugs, not just math bugs —
+  gate inputs must cover the combinations the new dispatch allows that the old
+  one didn't (a widened guard once permitted short-pattern × long-text pairs
+  the kernel's build loop couldn't handle; the gate caught the out-of-range
+  read before any number was recorded).
+- Convergence is scoped to the API shape you searched. Every guard, signature,
+  and dispatch boundary inherited from the incumbent is itself a hypothesis —
+  the audit above exists because "the loop converged" and "this is the fastest
+  way to do the job" are different claims.
 
 ## Findings log
 
