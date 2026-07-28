@@ -36,6 +36,12 @@ Do not start here when the bottleneck is unknown (profile end-to-end first) or
 when an asymptotic/algorithm change is still on the table (do that first; this
 loop tunes constants, and a better algorithm invalidates all tuning).
 
+For .NET, do not start here when the question is "what is this code allowed to
+do" rather than "which variant is fastest" — buffer ownership, `Span`/`Memory`
+selection, stackalloc budgets, and hot-path prohibitions are standing rules, not
+hypotheses to measure. Use **dotnet-performance-discipline** for those, and come
+back here once a specific function needs tuning.
+
 Estimate the ceiling before starting: if the function is X% of end-to-end time,
 even an infinite speedup buys only X% (Amdahl). Say this to the user up front —
 it sets expectations for the final PR numbers.

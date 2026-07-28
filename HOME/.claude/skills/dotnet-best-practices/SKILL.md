@@ -78,11 +78,13 @@ Your task is to ensure .NET/C# code in ${selection} meets the best practices spe
 
 ### Allocation-Aware Design
 
-- Prefer `ReadOnlyMemory<byte>` / `ReadOnlyMemory<char>` over `byte[]` / `string` when data is a slice of a longer-lived buffer — this avoids copying
-- Use `ReadOnlySpan<T>` for transient comparisons and parsing; promote to `ReadOnlyMemory<T>` only when you need to store the reference beyond stack lifetime
-- When a struct wraps owned bytes (e.g. a UTF-8 string key), use `ReadOnlyMemory<byte>` as the backing field instead of `byte[]` — this enables both copying construction (from `Span`) and zero-copy construction (from `Memory` slice of existing array)
+For anything on a hot path, the full rule set lives in the **dotnet-performance-discipline** skill — buffer ownership, `Span`/`Memory` selection, stackalloc budgets, hot-path prohibitions, and allocation verification. Load it before reviewing code that runs per item, per request, or per row. The essentials:
+
+- Prefer slicing a longer-lived buffer over copying: `ReadOnlySpan<T>` for transient comparisons and parsing, promoted to `ReadOnlyMemory<T>` only when the reference must outlive the stack or cross an `await`
+- **`Memory<T>` is for GC-owned buffers only.** Never expose a rented `ArrayPool<T>` buffer as `Memory<T>`, and never hold one in a `struct`/`record struct` field — structs copy silently, no copy carries the obligation to return, and use-after-return corrupts the pool without throwing anything. Lend a `Span<T>` from the renting scope instead
+- When a struct wraps *owned*, GC-allocated bytes such as a UTF-8 key, `ReadOnlyMemory<byte>` as the backing field is fine and enables zero-copy construction from an existing array — this holds only while nothing pooled can reach that field
 - For per-item work in a loop (per-job, per-request, per-row), ask: "Is this allocation invariant across iterations?" If yes, hoist to a shared cache or `static readonly` field
-- For small temporary buffers (≤ 128 elements), prefer `stackalloc`; for larger ones, use `ArrayPool<T>.Shared`
+- Size `stackalloc` by total byte budget and element type — never by a universal element count, and never from input length; above the budget fall back to `ArrayPool<T>.Shared` and return it in a `finally`
 - Avoid `new T[]`, `new List<T>()`, `new Dictionary<K,V>()` inside hot loops — pre-allocate and `.Clear()` or use fixed-size field arrays with element overwrite
 - Cache computed results that depend only on immutable input (e.g. line offsets from source text, parsed expressions by content hash)
 - When the same string is constructed repeatedly with identical content (e.g. diagnostic messages for the same entity), cache the last result and compare input bytes before regenerating

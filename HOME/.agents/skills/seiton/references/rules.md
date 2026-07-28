@@ -2,6 +2,31 @@
 
 All lint rules, their default severity, auto-fix availability, and document scope.
 
+## Tuning Order (Before Exclusions)
+
+When a rule reports diagnostics, use this order:
+
+1. Apply fixes (`seiton --fix`) or manual workflow edits.
+2. If the behavior is a repository-wide policy decision, tune `rules.<rule-id>` first:
+   - `enabled: false` (disable globally, last resort)
+   - `severity: warning|error` (adjust strictness)
+3. Use `exclusions` only for file/job-specific exceptions.
+
+For online rules, always enable them explicitly in config (`rules.<rule-id>.enabled: true`) and set `GITHUB_TOKEN` or `SEITON_GITHUB_TOKEN` to avoid rate limits.
+
+```yaml
+# Good: scoped exclusion for a legacy file
+exclusions:
+  - file: ".github/workflows/legacy-deploy.yml"
+    rules:
+      - unpinned-uses
+
+# Last resort: disable globally
+rules:
+  runner-no-latest:
+    enabled: false
+```
+
 ## Rule Table
 
 | Rule ID | Severity | Fix | Scope | Default |
@@ -31,12 +56,13 @@ All lint rules, their default severity, auto-fix availability, and document scop
 | run-inputs-context-direct-use | error | yes | both | on |
 | secrets-whole-context-access | error | no | both | on |
 | checkout-persist-credentials | warning | yes | both | on |
+| checkout-unsafe-pr | warning | yes | both | on |
 | deny-read-all | error | yes | both | on |
 | deny-inherit-secrets | error | no | both | on |
 | job-timeout-minutes-required | error | yes | both | on |
 | github-app-token-inputs | error | no | both | on |
-| cache-poisoning | warning | no | both | on |
-| self-hosted-runner | warning | no | both | on |
+| cache-poisoning-trigger | warning | no | both | on |
+| self-hosted-runner-trigger | warning | no | both | on |
 | unredacted-secrets | warning | no | both | on |
 | secrets-outside-env | warning | no | both | on |
 | workflow-secrets | error | no | both | on |
@@ -63,6 +89,7 @@ All lint rules, their default severity, auto-fix availability, and document scop
 | unsound-contains | mixed | no | workflow | on |
 | bot-conditions | mixed | no | workflow | on |
 | artipacked | mixed | no | workflow | on |
+| background-steps | mixed | no | workflow | on |
 | known-vulnerable-actions | error | no | workflow | opt-in |
 | impostor-commit | error | no | workflow | opt-in |
 | ref-confusion | error | no | workflow | opt-in |
@@ -98,7 +125,7 @@ Online rules (`known-vulnerable-actions`, `impostor-commit`, `ref-confusion`, `s
 
 ### Security
 
-`template-injection`, `credentials`, `secrets-whole-context-access`, `run-secrets-context-direct-use`, `run-env-context-direct-use`, `run-inputs-context-direct-use`, `unredacted-secrets`, `secrets-outside-env`, `insecure-commands`, `cache-poisoning`, `self-hosted-runner`, `dangerous-triggers`, `known-vulnerable-actions`, `impostor-commit`, `ref-confusion`
+`template-injection`, `credentials`, `secrets-whole-context-access`, `run-secrets-context-direct-use`, `run-env-context-direct-use`, `run-inputs-context-direct-use`, `unredacted-secrets`, `secrets-outside-env`, `insecure-commands`, `cache-poisoning-trigger`, `self-hosted-runner-trigger`, `dangerous-triggers`, `checkout-unsafe-pr`, `known-vulnerable-actions`, `impostor-commit`, `ref-confusion`
 
 ### Pinning & Supply Chain
 
@@ -110,7 +137,7 @@ Online rules (`known-vulnerable-actions`, `impostor-commit`, `ref-confusion`, `s
 
 ### Correctness
 
-`job-structure`, `reusable-workflow`, `needs-graph`, `dispatch-inputs`, `schedule-event`, `glob-pattern`, `expr-undefined-var`, `popular-action-inputs`, `local-action-inputs`, `github-app-token-inputs`, `workflow-call-input-default`, `matrix`, `if-cond`, `unsound-condition`, `unsound-contains`, `bot-conditions`
+`job-structure`, `reusable-workflow`, `needs-graph`, `dispatch-inputs`, `schedule-event`, `glob-pattern`, `expr-undefined-var`, `popular-action-inputs`, `local-action-inputs`, `github-app-token-inputs`, `workflow-call-input-default`, `matrix`, `if-cond`, `unsound-condition`, `unsound-contains`, `bot-conditions`, `background-steps`
 
 ### Style & Best Practice
 

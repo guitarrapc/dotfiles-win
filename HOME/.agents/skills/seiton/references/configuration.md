@@ -17,7 +17,7 @@ No config file is required. All defaults are safe.
 
 ## Nested repositories
 
-Discovery walks **up** parent directories from the current working directory. In a nested clone, the parent repo's `.github/seiton.yaml` may be used unintentionally.
+**Config discovery** and **input discovery** are CWD-scoped only. In nested clones or multi-checkout CI, set `working-directory` to the target repo or pass explicit paths (`--config`, `-c`, `SEITON_CONFIG`, file arguments).
 
 ```bash
 cd .references/actions
@@ -77,9 +77,10 @@ rules:
     #     ubuntu-latest: "ubuntu-24.04"
     # credentials:
     #   public-registries: [registry.example.com]
-    # cache-poisoning:
-    #   untrusted-triggers: [issue_comment]
-    # self-hosted-runner:
+    # cache-poisoning-trigger:
+    #   # Built-in low-trust: pull_request_target, workflow_run, issue_comment
+    #   untrusted-triggers: [discussion]
+    # self-hosted-runner-trigger:
     #   untrusted-triggers: [issue_comment]
     # unredacted-secrets:
     #   output-commands: [tee]
@@ -99,8 +100,15 @@ exclusions:
   - file: "<glob-pattern>"       # Path glob for workflow files
     jobs:                        # Optional: limit to specific jobs
       - <job-id>
-    rules:                       # Rules to suppress
-      - <rule-id>
+    rules:                       # Rules to suppress (omit = all rules for file)
+
+# ─── Discovery ───────────────────────────────────────────────────────────────
+discovery:
+  skip-agentic-workflows: false  # true = skip files with "# gh-aw-metadata:" in first 10 lines
+
+# gh-aw files WITHOUT that marker (e.g. agentics-maintenance.yml) need exclusions:
+# exclusions:
+#   - file: ".github/workflows/agentics-maintenance.yml"
 
 # ─── Fix settings ────────────────────────────────────────────────────────────
 fix:
@@ -139,13 +147,15 @@ output:
 
 ## Common Patterns
 
-### Disable a noisy rule
+### Last resort: disable a rule globally
 
 ```yaml
 rules:
   runner-no-latest:
     enabled: false
 ```
+
+Use this only when repository policy truly applies to all files. For legacy or limited scope cases, prefer `exclusions` below.
 
 ### Enable online audit rules
 
@@ -158,6 +168,19 @@ rules:
 ```
 
 Requires `GITHUB_TOKEN` or `SEITON_GITHUB_TOKEN`.
+
+### File-only exclusion (`rules` omitted or `["*"]`)
+
+Both forms below suppress all rules for matching files:
+
+```yaml
+exclusions:
+  - file: ".github/workflows/generated.yml"
+  - file: ".github/workflows/agentics-maintenance.yml"
+    rules: ["*"]
+```
+
+Prefer omitted `rules` for readability. `rules: ["*"]` is supported for explicitness/tooling compatibility.
 
 ### Suppress a rule for specific files
 
@@ -178,6 +201,18 @@ exclusions:
       - publish
     rules:
       - credentials
+```
+
+### Skip Agentic Workflow (gh-aw) files
+
+`skip-agentic-workflows` matches only `# gh-aw-metadata:` in the first 10 lines (not file names or `DO NOT EDIT`).
+
+```yaml
+discovery:
+  skip-agentic-workflows: true
+
+exclusions:
+  - file: ".github/workflows/agentics-maintenance.yml"  # no metadata header
 ```
 
 ### Pin runner versions with fix mapping
@@ -209,7 +244,7 @@ seiton validate-config
 
 # Show which config file is loaded
 seiton check --verbose
-# Prints: verbose: config: /path/to/.github/seiton.yaml (discovered from /cwd, walked up N level(s))
+# Prints: verbose: config: /path/to/.github/seiton.yaml (discovered under cwd /path/to)
 # Or: verbose: config: /path (from --config)
 ```
 
