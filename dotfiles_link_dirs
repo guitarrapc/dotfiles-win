@@ -1,0 +1,2 @@
+# Link each Codex skill directory as a whole; keep SKILL.md a regular file.
+HOME/.agents/skills/*
