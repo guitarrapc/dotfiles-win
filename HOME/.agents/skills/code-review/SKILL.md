@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Adversarial multi-agent review for implementation changes. Reviews correctness, performance, API usability, test coverage (including equivalence classes and negative cases), and spec/doc synchronization in parallel; tries to refute top claims before reporting them. Repeats until no validated findings remain, then runs benchmarks.
+description: Adversarial multi-agent review for implementation changes. Reviews correctness, performance, API usability, test coverage (including equivalence classes and negative cases), and spec/doc and comment accuracy in parallel; tries to refute top claims before reporting them. Repeats until no validated findings remain, then runs benchmarks.
 ---
 
 # Code Review
@@ -65,11 +65,15 @@ Evaluate from the caller's perspective:
 - For security-sensitive code, require negative tests (should NOT flag) >= positive tests (should flag).
 - Use realistic caller patterns rather than internal implementation details.
 
-#### Spec/Doc Synchronization
+#### Spec/Doc Synchronization and Comment Accuracy
 
 - If behavior changed, confirm that relevant design docs or API specs are updated.
 - If user-facing docs (README, usage guides, API references) describe the behavior, verify that they remain accurate.
 - Cross-check that docs, code, and tests all agree on the same behavior.
+- Treat every code comment, doc comment, and spec sentence that the change touches or that describes changed code as a claim. Verify it by tracing the code it describes, not against neighboring comments, commit messages, or memory. A wrong comment is a finding when it would mislead a maintainer.
+- Check the comments around the change too, not only the edited ones. A changed dispatch, a shared helper, or moved code can make comments wrong that describe other branches, other callers, or the files they point to.
+- Numbers in comments (ranges, bounds, thresholds, size or version splits, speedups) must match what the code derives or what a recorded measurement shows. A bound states its inputs and its result.
+- Comparative, causal, and scope wording ("the most", "because", "only", "every") needs evidence of that comparison, cause, or scope. Without the evidence, restate it as the facts that were measured.
 
 Reviewers return only claims with exact evidence, impact, and confidence; never inflate uncertainty into a finding.
 
@@ -99,6 +103,8 @@ For each surviving finding:
 4. Run the full test suite.
 5. Restart from parallel investigation.
 
+For a comment or doc finding, do not patch the wording where it was flagged. Re-derive the content from the implementation, and re-measure any figure that the code cannot derive. Then search for every copy of the claim (other comments, specs, plans, tests) and fix them together. If a figure cannot be verified, remove it or attribute it (source, date, environment) instead of restating it.
+
 ## Completion
 
 After a round has no surviving findings:
@@ -113,4 +119,4 @@ After a round has no surviving findings:
 - [ ] Every report-worthy claim got three independent votes; 2/3-refuted claims were removed
 - [ ] Classification combinations and false positives are tested; security-sensitive code has negative tests >= positive tests
 - [ ] Hot paths avoid needless work; APIs are straightforward and tested through idiomatic caller patterns
-- [ ] Docs/specs, implementation, and tests agree; the full suite and applicable benchmarks pass
+- [ ] Docs/specs, comments, implementation, and tests agree; comment fixes were re-derived from the code and every copy of a claim was fixed; the full suite and applicable benchmarks pass
