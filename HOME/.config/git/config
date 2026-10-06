@@ -1,7 +1,7 @@
 [user]
 	name = Ikiru Yoshizaki
 	email = 3856350+guitarrapc@users.noreply.github.com
-	signingKey = EAEED1377950C5B6CFA6EC3FF93DD3822D017453
+	signingKey = 46F332931C167F701E89379B2C369B5EEBCC1706
 
 # -- definitely make git better -- #
 [core]
@@ -73,6 +73,7 @@
 	selected = manager
 [pull]
 	rebase = true
+	autostash = true
 [submodule]
 	recurse = true
 [filter "lfs"]
@@ -83,7 +84,7 @@
 [lfs]
 	locksverify = false
 [gpg]
-	program = gpg
+	program = openpgp
 [gpg "ssh"]
 	program =
 	allowedSignersFile =
