@@ -1,7 +1,7 @@
 [user]
 	name = Ikiru Yoshizaki
 	email = 3856350+guitarrapc@users.noreply.github.com
-	signingKey = 46F332931C167F701E89379B2C369B5EEBCC1706
+	signingKey = 5713A84BB6DA35C5D1CCEB2B683448F9B119BD5D
 
 # -- definitely make git better -- #
 [core]
@@ -84,7 +84,7 @@
 [lfs]
 	locksverify = false
 [gpg]
-	program = openpgp
+	program = C:\\Program Files\\Git\\usr\\bin\\gpg.exe
 [gpg "ssh"]
 	program =
 	allowedSignersFile =
