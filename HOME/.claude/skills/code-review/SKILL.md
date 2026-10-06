@@ -103,7 +103,15 @@ For each surviving finding:
 4. Run the full test suite.
 5. Restart from parallel investigation.
 
-For a comment or doc finding, do not patch the wording where it was flagged. Re-derive the content from the implementation, and re-measure any figure that the code cannot derive. Then search for every copy of the claim (other comments, specs, plans, tests) and fix them together. If a figure cannot be verified, remove it or attribute it (source, date, environment) instead of restating it.
+For a comment or doc finding, do not patch the wording where it was flagged. Write the replacement only from facts you have checked:
+
+1. Gather the facts first: the raw source of each figure (log, output, probe or harness source, transcript), what each build, run or harness actually is, and the document's own conventions (labels, units, exclusion rules). Re-derive from the implementation what the code determines, and re-measure only what neither the code nor existing data gives.
+2. Draft the smallest replacement from those facts. A reviewer's or verifier's proposed wording and figures are claims too: check them before using them.
+3. Before editing, check the draft line by line: every figure, label, run attribution, method and causal word against its source, and every antecedent it creates or breaks in the surrounding text. A sentence the fix adds is reviewed next round like any other.
+4. Search for every copy of the claim (other comments, specs, plans, tests) and fix them together. A rule the fix states (an exclusion, a label convention) is applied evenly to everything it covers.
+5. If a figure cannot be verified, remove it or attribute it (source, date, environment) instead of restating it, and add no detail the finding did not need.
+
+Fixes written before their facts are checked are what keep a docs-only loop from converging: each one becomes the next round's finding.
 
 ## Completion
 
@@ -119,4 +127,4 @@ After a round has no surviving findings:
 - [ ] Every report-worthy claim got three independent votes; 2/3-refuted claims were removed
 - [ ] Classification combinations and false positives are tested; security-sensitive code has negative tests >= positive tests
 - [ ] Hot paths avoid needless work; APIs are straightforward and tested through idiomatic caller patterns
-- [ ] Docs/specs, comments, implementation, and tests agree; comment fixes were re-derived from the code and every copy of a claim was fixed; the full suite and applicable benchmarks pass
+- [ ] Docs/specs, comments, implementation, and tests agree; comment fixes were re-derived from the code, every figure and attribution in the new text was checked against its source before writing, and every copy of a claim was fixed; the full suite and applicable benchmarks pass
