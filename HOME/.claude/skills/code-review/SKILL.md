@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Adversarial multi-agent review for implementation changes. Reviews correctness, performance, API usability, test coverage (including equivalence classes and negative cases), and spec/doc and comment accuracy in parallel; tries to refute top claims before reporting them. Repeats until no validated findings remain, then runs benchmarks.
+description: Adversarial multi-agent review for implementation changes. Reviews correctness, performance, API usability, test coverage (including equivalence classes and negative cases), and spec/doc and comment accuracy, content and wording in parallel; tries to refute top claims before reporting them. Repeats until no validated findings remain, then runs benchmarks.
 ---
 
 # Code Review
@@ -75,11 +75,24 @@ Evaluate from the caller's perspective:
 - Numbers in comments (ranges, bounds, thresholds, size or version splits, speedups) must match what the code derives or what a recorded measurement shows. A bound states its inputs and its result.
 - Comparative, causal, and scope wording ("the most", "because", "only", "every") needs evidence of that comparison, cause, or scope. Without the evidence, restate it as the facts that were measured.
 
+Comment content and wording, for every comment and doc comment the change adds or touches:
+
+- A code comment says why not: why the code is not the simpler or more obvious form, and the constraint or case that rules that form out. It does not restate what the code does.
+- A test comment serves the proof. It states the premise that makes the assertion prove the behavior, such as why this input reaches the code under test and what would let the test pass for another reason. The test's name and assertions carry the rest.
+- A comment holds only what a maintainer needs at that line. Measurements, history, refuted alternatives and review notes belong in the spec or design record. The comment keeps one clause of reason.
+- Comments are natural, plain English in short sentences. Flag what fluent prose avoids: a semicolon or a dash chaining clauses, stacked parentheses, and fragments that drop the words a sentence needs.
+- A comment carries no identifier that will not outlive the change, such as a plan or phase name, a task id or a review round. It says which case the code or test handles.
+- A comment does not name another library, tool or product as its reason ("as X does"). It describes the technique or the rule itself. A third party is named only where the reader must know it to act, such as a platform that cannot read the output.
+- Time words in a comment ("until X exists", "will be added", "now") are checked against the current code. Rewrite the ones that have come true or gone stale.
+- After a merge, lists and "unsupported" statements that either side wrote, such as supported values or modes, are checked against the merged code.
+- When a doc comment feeds a generated artifact, such as an API page or a reference table, the artifact is regenerated in the same change.
+- A reviewer does not excuse a broken project rule as intentional. Fix it, or report it as a finding for the rule's owner to decide.
+
 Reviewers return only claims with exact evidence, impact, and confidence; never inflate uncertainty into a finding.
 
 ### 2. Rank and Deduplicate
 
-Merge duplicates; rank by impact severity, then likelihood/reproducibility, affected scope, and confidence. Exclude only style preferences and unsupported suspicions. Every remaining report-worthy claim enters the ranked shortlist and must pass Step 3, highest first.
+Merge duplicates; rank by impact severity, then likelihood/reproducibility, affected scope, and confidence. Exclude only style preferences and unsupported suspicions. A comment that breaks a rule under "Comment content and wording" is a finding, not a style preference. Every remaining report-worthy claim enters the ranked shortlist and must pass Step 3, highest first.
 
 ### 3. Try to Refute Every Top Claim
 
@@ -110,6 +123,7 @@ For a comment or doc finding, do not patch the wording where it was flagged. Wri
 3. Before editing, check the draft line by line: every figure, label, run attribution, method and causal word against its source, and every antecedent it creates or breaks in the surrounding text. A sentence the fix adds is reviewed next round like any other.
 4. Search for every copy of the claim (other comments, specs, plans, tests) and fix them together. A rule the fix states (an exclusion, a label convention) is applied evenly to everything it covers.
 5. If a figure cannot be verified, remove it or attribute it (source, date, environment) instead of restating it, and add no detail the finding did not need.
+6. Write the replacement under the rules of "Comment content and wording": why not in code, the proof's premise in tests, short plain sentences, and nothing the line does not need. A figure that was only evidence moves to the spec and leaves the comment.
 
 Fixes written before their facts are checked are what keep a docs-only loop from converging: each one becomes the next round's finding.
 
@@ -127,4 +141,5 @@ After a round has no surviving findings:
 - [ ] Every report-worthy claim got three independent votes; 2/3-refuted claims were removed
 - [ ] Classification combinations and false positives are tested; security-sensitive code has negative tests >= positive tests
 - [ ] Hot paths avoid needless work; APIs are straightforward and tested through idiomatic caller patterns
+- [ ] Code comments say why not and test comments serve the proof, in short plain sentences with no chained clauses, no plan identifiers, no third party named as the reason, and no evidence that belongs in the spec. Generated artifacts fed by doc comments were regenerated
 - [ ] Docs/specs, comments, implementation, and tests agree; comment fixes were re-derived from the code, every figure and attribution in the new text was checked against its source before writing, and every copy of a claim was fixed; the full suite and applicable benchmarks pass
