@@ -80,6 +80,7 @@ Comment content and wording, for every comment and doc comment the change adds o
 - A code comment says why not: why the code is not the simpler or more obvious form, and the constraint or case that rules that form out. It does not restate what the code does.
 - A test comment serves the proof. It states the premise that makes the assertion prove the behavior, such as why this input reaches the code under test and what would let the test pass for another reason. The test's name and assertions carry the rest.
 - A comment holds only what a maintainer needs at that line. Measurements, history, refuted alternatives and review notes belong in the spec or design record. The comment keeps one clause of reason.
+- A block that explains a standard, a format or a layout the code cannot show is needed information, however long: a diagram of a bit stream or a memory layout, a worked example, the steps of an algorithm from the specification, an overview of a pipeline. It is not restatement, and it is not flagged for its length. Flag only a measurement or history inside it, and a figure that disagrees with the code. Such a figure is corrected in place and is never a reason to remove the block.
 - Comments are natural, plain English in short sentences. Flag what fluent prose avoids: a semicolon or a dash chaining clauses, stacked parentheses, and fragments that drop the words a sentence needs.
 - A comment carries no identifier that will not outlive the change, such as a plan or phase name, a task id or a review round. It says which case the code or test handles.
 - A comment does not name another library, tool or product as its reason ("as X does"). It describes the technique or the rule itself. A third party is named only where the reader must know it to act, such as a platform that cannot read the output.
@@ -123,7 +124,7 @@ For a comment or doc finding, do not patch the wording where it was flagged. Wri
 3. Before editing, check the draft line by line: every figure, label, run attribution, method and causal word against its source, and every antecedent it creates or breaks in the surrounding text. A sentence the fix adds is reviewed next round like any other.
 4. Search for every copy of the claim (other comments, specs, plans, tests) and fix them together. A rule the fix states (an exclusion, a label convention) is applied evenly to everything it covers.
 5. If a figure cannot be verified, remove it or attribute it (source, date, environment) instead of restating it, and add no detail the finding did not need.
-6. Write the replacement under the rules of "Comment content and wording": why not in code, the proof's premise in tests, short plain sentences, and nothing the line does not need. A figure that was only evidence moves to the spec and leaves the comment.
+6. Write the replacement under the rules of "Comment content and wording": why not in code, the proof's premise in tests, short plain sentences, and nothing the line does not need. A figure that was only evidence moves to the spec and leaves the comment. A diagram, worked example or algorithm outline that explains the standard or a layout stays, with its figures checked against the code.
 
 Fixes written before their facts are checked are what keep a docs-only loop from converging: each one becomes the next round's finding.
 
@@ -141,5 +142,5 @@ After a round has no surviving findings:
 - [ ] Every report-worthy claim got three independent votes; 2/3-refuted claims were removed
 - [ ] Classification combinations and false positives are tested; security-sensitive code has negative tests >= positive tests
 - [ ] Hot paths avoid needless work; APIs are straightforward and tested through idiomatic caller patterns
-- [ ] Code comments say why not and test comments serve the proof, in short plain sentences with no chained clauses, no plan identifiers, no third party named as the reason, and no evidence that belongs in the spec. Generated artifacts fed by doc comments were regenerated
+- [ ] Code comments say why not and test comments serve the proof, in short plain sentences with no chained clauses, no plan identifiers, no third party named as the reason, and no evidence that belongs in the spec. Diagrams, worked examples and algorithm outlines that explain a standard or a layout were kept and their figures checked. Generated artifacts fed by doc comments were regenerated
 - [ ] Docs/specs, comments, implementation, and tests agree; comment fixes were re-derived from the code, every figure and attribution in the new text was checked against its source before writing, and every copy of a claim was fixed; the full suite and applicable benchmarks pass
