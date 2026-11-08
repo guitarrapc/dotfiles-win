@@ -85,6 +85,7 @@
 	locksverify = false
 [gpg]
 	program = C:\\Program Files\\Git\\usr\\bin\\gpg.exe
+	format = openpgp
 [gpg "ssh"]
 	program =
 	allowedSignersFile =
